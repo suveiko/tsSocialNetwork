@@ -1,12 +1,11 @@
-
 import React from "react";
 
 type MessageType = {
-    mess: string
+    message: string
 }
 
-export const Message = (p:MessageType) => {
+export const Message = ({message}: MessageType) => {
     return (
-        <div>{p.mess}</div>
+        <div>{message}</div>
     )
 }
