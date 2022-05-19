@@ -1,4 +1,3 @@
-import React from "react";
 
 export type PostsArrayType = {
     id: number
@@ -31,7 +30,7 @@ export let state = {
             {id: 3, likeCounts: 44, message: 'I like you'},
             {id: 4, likeCounts: 2, message: 'What happend?'},
             {id: 5, likeCounts: 130, message: 'NOOO'},
-            {id: 6, likeCounts: 10232, message: 'YE'},
+            {id: 6, likeCounts: 10232, message: 'YE'}
         ]
     },
     messagesPage: {
@@ -41,7 +40,7 @@ export let state = {
             {id: 3, message: 'Where are you from?'},
             {id: 4, message: 'Howdy'},
             {id: 5, message: 'Yo'},
-            {id: 6, message: 'Yo'},
+            {id: 6, message: 'Yo'}
         ],
         dialogs: [
             {id: 1, name: 'Sasha'},
