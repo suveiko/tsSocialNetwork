@@ -7,13 +7,14 @@ type ProfileType = {
     state: {
         posts: PostsArrayType[]
     }
+    addPost: (newMessage: string) => void
 }
 
-export const Profile = ({state}: ProfileType) => {
+export const Profile = ({state, addPost}: ProfileType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={state.posts}/>
+            <MyPosts posts={state.posts} addPost={addPost}/>
         </div>
     )
 }

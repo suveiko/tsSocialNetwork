@@ -1,3 +1,4 @@
+import {renderTree} from "../render";
 
 export type PostsArrayType = {
     id: number
@@ -19,10 +20,11 @@ export type StateType = {
     messagesPage: {
         messages: MessagesArrayType[]
         dialogs: DialogsArrayType[]
-    }
+    },
+    sidebar: {}
 }
 
-export let state = {
+export let state: StateType = {
     profilePage: {
         posts: [
             {id: 1, likeCounts: 10, message: 'Hello, Im Sasha'},
@@ -50,5 +52,15 @@ export let state = {
             {id: 5, name: 'Jack'},
             {id: 6, name: 'Mike'}
         ]
+    },
+    sidebar: {}
+}
+
+export const addPost = (newMessage: string) => {
+    let newPost: PostsArrayType = {
+        id: new Date().getTime(), likeCounts: 1022, message: newMessage
     }
+    state.profilePage.posts.push(newPost)
+
+    renderTree(state)
 }
