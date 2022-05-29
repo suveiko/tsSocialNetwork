@@ -1,5 +1,8 @@
-import {renderTree} from "../render";
+let renderTree = () => {}
 
+export const subscriber = (observer: () => void) => {
+    renderTree = observer
+}
 export type PostsArrayType = {
     id: number
     likeCounts: number
@@ -67,15 +70,13 @@ export const addPost = () => {
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
 
-    renderTree(state)
+    renderTree()
 }
-
 export const updateNewPostText = (newMessage: string) => {
     state.profilePage.newPostText = newMessage
 
-    renderTree(state)
+    renderTree()
 }
-
 export const addMessage = () => {
     let newMessage: MessagesArrayType = {
         id: new Date().getTime(), message: state.messagesPage.newMessageTextValue
@@ -83,11 +84,10 @@ export const addMessage = () => {
     state.messagesPage.messages.push(newMessage)
     state.messagesPage.newMessageTextValue = ''
 
-    renderTree(state)
+    renderTree()
 }
-
 export const updateNewMessageText = (newMessage: string) => {
     state.messagesPage.newMessageTextValue = newMessage
 
-    renderTree(state)
+    renderTree()
 }

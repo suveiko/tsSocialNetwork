@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, RefObject, useRef} from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
@@ -15,7 +15,7 @@ type DialogsPropsType = {
 }
 
 export const Dialogs = ({state, ...props}: DialogsPropsType) => {
-    const dialogsElement = state.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
+    const dialogsElement = state.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)
     const messagesElement = state.messages.map(m => <Message key={m.id} message={m.message}/>)
 
     const addMessage = () => {
