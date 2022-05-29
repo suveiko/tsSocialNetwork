@@ -1,4 +1,4 @@
-import React, {RefObject, useRef} from "react";
+import React, {ChangeEvent, KeyboardEvent, RefObject, useRef} from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
@@ -8,17 +8,26 @@ type DialogsPropsType = {
     state: {
         messages: MessagesArrayType[]
         dialogs: DialogsArrayType[]
+        newMessageTextValue: string
     }
+    newMessageText: (newMessage: string) => void
+    addMessage: () => void
 }
 
-export const Dialogs = ({state}: DialogsPropsType) => {
+export const Dialogs = ({state, ...props}: DialogsPropsType) => {
     const dialogsElement = state.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
     const messagesElement = state.messages.map(m => <Message key={m.id} message={m.message}/>)
 
-    let newMessage = useRef() as RefObject<HTMLTextAreaElement>
     const addMessage = () => {
-        let text = newMessage.current?.value
-        alert(text)
+        props.addMessage()
+    }
+    const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
+        props.newMessageText(e.currentTarget.value)
+    }
+    const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && state.newMessageTextValue.trim() !== '') {
+            props.addMessage()
+        }
     }
 
     return (
@@ -29,10 +38,18 @@ export const Dialogs = ({state}: DialogsPropsType) => {
             <div className={s.messages}>
                 {messagesElement}
             </div>
-
-            <button onClick={addMessage}>Add message</button>
-            <textarea ref={newMessage}></textarea>
+            <button
+                style={{cursor: 'pointer'}}
+                onClick={addMessage}
+                disabled={state.newMessageTextValue.trim() === ''}
+            >
+                Add message
+            </button>
+            <input
+                value={state.newMessageTextValue}
+                onChange={onChangeMessage}
+                onKeyUp={onKeyInputHandler}
+            />
         </div>
-
     )
 }

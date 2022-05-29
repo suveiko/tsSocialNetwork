@@ -8,7 +8,7 @@ import {Profile} from "./components/Profile/Profile";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {addPost, state} from "./redux/state";
+import {addMessage, addPost, state, updateNewMessageText, updateNewPostText} from "./redux/state";
 import {Friends} from "./components/Friends/Friends";
 
 function App() {
@@ -17,8 +17,16 @@ function App() {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <Dialogs state={state.messagesPage}/>}/>
-                <Route path='/profile' render={() => <Profile state={state.profilePage} addPost={addPost}/>}/>
+                <Route path='/dialogs' render={() =>
+                    <Dialogs
+                    state={state.messagesPage}
+                    newMessageText={updateNewMessageText}
+                    addMessage={addMessage}
+                />}/>
+                <Route path='/profile' render={() => <Profile
+                    state={state.profilePage}
+                    addPost={addPost}
+                    updateNewPostText={updateNewPostText}/>}/>
                 <Route path='/news' render={News}/>
                 <Route path='/music' render={Music}/>
                 <Route path='/settings' render={Settings}/>

@@ -16,9 +16,11 @@ export type DialogsArrayType = {
 export type StateType = {
     profilePage: {
         posts: PostsArrayType[]
+        newPostText: string
     },
     messagesPage: {
         messages: MessagesArrayType[]
+        newMessageTextValue: string
         dialogs: DialogsArrayType[]
     },
     sidebar: {}
@@ -33,7 +35,8 @@ export let state: StateType = {
             {id: 4, likeCounts: 2, message: 'What happend?'},
             {id: 5, likeCounts: 130, message: 'NOOO'},
             {id: 6, likeCounts: 10232, message: 'YE'}
-        ]
+        ],
+        newPostText: ''
     },
     messagesPage: {
         messages: [
@@ -44,6 +47,7 @@ export let state: StateType = {
             {id: 5, message: 'Yo'},
             {id: 6, message: 'Yo'}
         ],
+        newMessageTextValue: '',
         dialogs: [
             {id: 1, name: 'Sasha'},
             {id: 2, name: 'Artem'},
@@ -56,11 +60,34 @@ export let state: StateType = {
     sidebar: {}
 }
 
-export const addPost = (newMessage: string) => {
+export const addPost = () => {
     let newPost: PostsArrayType = {
-        id: new Date().getTime(), likeCounts: 1022, message: newMessage
+        id: new Date().getTime(), likeCounts: 1022, message: state.profilePage.newPostText
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
+
+    renderTree(state)
+}
+
+export const updateNewPostText = (newMessage: string) => {
+    state.profilePage.newPostText = newMessage
+
+    renderTree(state)
+}
+
+export const addMessage = () => {
+    let newMessage: MessagesArrayType = {
+        id: new Date().getTime(), message: state.messagesPage.newMessageTextValue
+    }
+    state.messagesPage.messages.push(newMessage)
+    state.messagesPage.newMessageTextValue = ''
+
+    renderTree(state)
+}
+
+export const updateNewMessageText = (newMessage: string) => {
+    state.messagesPage.newMessageTextValue = newMessage
 
     renderTree(state)
 }
