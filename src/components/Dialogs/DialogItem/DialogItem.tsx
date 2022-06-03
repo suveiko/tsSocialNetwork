@@ -3,7 +3,7 @@ import s from "./DialogItem.module.css"
 
 type DialogItemType = {
     name: string
-    id: number
+    id: string
 }
 
 export const DialogItem = ({name, id}: DialogItemType) => {

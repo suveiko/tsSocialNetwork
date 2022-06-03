@@ -1,14 +1,16 @@
+import {v1} from "uuid";
+
 export type PostsArrayType = {
-    id: number
+    id: string
     likeCounts: number
     message: string
 }
 export type MessagesArrayType = {
-    id: number
+    id: string
     message: string
 }
 export type DialogsArrayType = {
-    id: number
+    id: string
     name: string
 }
 export type StateType = {
@@ -36,59 +38,47 @@ export type ActionsType =
     | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof updateNewMessageTextActionCreator>
 
-export const addPostActionCreator = () => {
-    return {
-        type: "ADD-POST"
-    } as const
-}
-export const updateNewPostTextActionCreator = (newMessage: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newMessage: newMessage
-    } as const
-}
-export const addMessageActionCreator = () => {
-    return {
-        type: "ADD-MESSAGE"
-    } as const
-}
-export const updateNewMessageTextActionCreator = (newMessage: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessage: newMessage
-    } as const
-}
+export const addPostActionCreator = () => ({type: "ADD-POST"} as const)
+export const updateNewPostTextActionCreator = (newMessage: string) => ({
+    type: 'UPDATE-NEW-POST-TEXT',
+    newMessage: newMessage
+} as const)
+export const addMessageActionCreator = () => ({type: "ADD-MESSAGE"} as const)
+export const updateNewMessageTextActionCreator = (newMessage: string) => ({
+    type: 'UPDATE-NEW-MESSAGE-TEXT',
+    newMessage: newMessage
+} as const)
 
 export const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
-                {id: 1, likeCounts: 10, message: 'Hello, Im Sasha'},
-                {id: 2, likeCounts: 2, message: 'Go away'},
-                {id: 3, likeCounts: 44, message: 'I like you'},
-                {id: 4, likeCounts: 2, message: 'What happening?'},
-                {id: 5, likeCounts: 130, message: 'No'},
-                {id: 6, likeCounts: 10232, message: 'YE'}
+                {id: v1(), likeCounts: 10, message: 'Hello, Im Sasha'},
+                {id: v1(), likeCounts: 2, message: 'Go away'},
+                {id: v1(), likeCounts: 44, message: 'I like you'},
+                {id: v1(), likeCounts: 2, message: 'What happening?'},
+                {id: v1(), likeCounts: 130, message: 'No'},
+                {id: v1(), likeCounts: 10232, message: 'YE'}
             ],
             newPostText: ''
         },
         messagesPage: {
             messages: [
-                {id: 1, message: 'Hi'},
-                {id: 2, message: 'How are you?'},
-                {id: 3, message: 'Where are you from?'},
-                {id: 4, message: 'Howdy'},
-                {id: 5, message: 'Yo'},
-                {id: 6, message: 'Yo'}
+                {id: v1(), message: 'Hi'},
+                {id: v1(), message: 'How are you?'},
+                {id: v1(), message: 'Where are you from?'},
+                {id: v1(), message: 'Howdy'},
+                {id: v1(), message: 'Yo'},
+                {id: v1(), message: 'Yo'}
             ],
             newMessageTextValue: '',
             dialogs: [
-                {id: 1, name: 'Sasha'},
-                {id: 2, name: 'Artem'},
-                {id: 3, name: 'Svetlana'},
-                {id: 4, name: 'Sergey'},
-                {id: 5, name: 'Jack'},
-                {id: 6, name: 'Mike'}
+                {id: v1(), name: 'Sasha'},
+                {id: v1(), name: 'Artem'},
+                {id: v1(), name: 'Svetlana'},
+                {id: v1(), name: 'Sergey'},
+                {id: v1(), name: 'Jack'},
+                {id: v1(), name: 'Mike'}
             ]
         },
         sidebar: {}
@@ -106,7 +96,7 @@ export const store: StoreType = {
     dispatch(action) {
         if (action.type === 'ADD-POST') {
             const newPost: PostsArrayType = {
-                id: new Date().getTime(), likeCounts: 1022, message: this._state.profilePage.newPostText
+                id: v1(), likeCounts: 1022, message: this._state.profilePage.newPostText
             }
             this._state.profilePage.posts.unshift(newPost)
             this._state.profilePage.newPostText = ''
@@ -122,7 +112,7 @@ export const store: StoreType = {
 
         if (action.type === 'ADD-MESSAGE') {
             const newMessage: MessagesArrayType = {
-                id: new Date().getTime(), message: this._state.messagesPage.newMessageTextValue
+                id: v1(), message: this._state.messagesPage.newMessageTextValue
             }
             this._state.messagesPage.messages.push(newMessage)
             this._state.messagesPage.newMessageTextValue = ''
