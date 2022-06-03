@@ -1,5 +1,4 @@
 import s from "./ProfileInfo.module.css";
-import React from "react";
 
 export const ProfileInfo = () => {
     return (

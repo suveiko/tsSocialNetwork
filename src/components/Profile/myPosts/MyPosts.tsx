@@ -1,7 +1,9 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import {ChangeEvent, KeyboardEvent} from "react";
+
 import {Post} from "./posts/Post";
-import s from "./MyPosts.module.css"
 import {PostsArrayType} from "../../../redux/state";
+
+import s from "./MyPosts.module.css"
 
 type MyPostsType = {
     posts: PostsArrayType[]

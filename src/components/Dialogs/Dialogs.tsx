@@ -1,8 +1,10 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
-import s from "./Dialogs.module.css"
+import {ChangeEvent, KeyboardEvent} from "react";
+
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
 import {DialogsArrayType, MessagesArrayType} from "../../redux/state";
+
+import s from "./Dialogs.module.css"
 
 type DialogsPropsType = {
     state: {
@@ -18,9 +20,8 @@ export const Dialogs = ({state, ...props}: DialogsPropsType) => {
     const dialogsElement = state.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)
     const messagesElement = state.messages.map(m => <Message key={m.id} message={m.message}/>)
 
-    const addMessage = () => {
-        props.addMessage()
-    }
+    const addMessage = () => props.addMessage()
+
     const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
         props.newMessageText(e.currentTarget.value)
     }

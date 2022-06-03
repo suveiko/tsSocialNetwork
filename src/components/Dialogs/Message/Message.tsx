@@ -1,5 +1,3 @@
-import React from "react";
-
 type MessageType = {
     message: string
 }

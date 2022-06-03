@@ -13,10 +13,10 @@ import {StateType} from "./redux/state";
 
 type AppType = {
     state: StateType
-    updateNewMessageText: (newMessage: string) => void;
-    addMessage: () => void;
-    updateNewPostText: (newMessage: string) => void;
-    addPost: () => void;
+    updateNewMessageText: (newMessage: string) => void
+    addMessage: () => void
+    updateNewPostText: (newMessage: string) => void
+    addPost: () => void
 }
 
 function App({state, updateNewMessageText, addMessage, addPost, updateNewPostText}: AppType) {
@@ -25,16 +25,20 @@ function App({state, updateNewMessageText, addMessage, addPost, updateNewPostTex
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <Dialogs
-                    state={state.messagesPage}
-                    newMessageText={updateNewMessageText}
-                    addMessage={addMessage}
-                />}/>
-                <Route path='/profile' render={() => <Profile
-                    state={state.profilePage}
-                    updateNewPostText={updateNewPostText}
-                    addPost={addPost}
-                />}/>
+                <Route path='/dialogs' render={() =>
+                    <Dialogs
+                        state={state.messagesPage}
+                        newMessageText={updateNewMessageText}
+                        addMessage={addMessage}
+                    />
+                }/>
+                <Route path='/profile' render={() =>
+                    <Profile
+                        state={state.profilePage}
+                        updateNewPostText={updateNewPostText}
+                        addPost={addPost}
+                    />
+                }/>
                 <Route path='/news' render={News}/>
                 <Route path='/music' render={Music}/>
                 <Route path='/settings' render={Settings}/>

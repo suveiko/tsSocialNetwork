@@ -1,9 +1,10 @@
-import React from 'react';
-import './index.css';
-import {store} from "./redux/state";
-import {BrowserRouter} from "react-router-dom";
-import App from "./App";
 import ReactDOM from "react-dom";
+import {BrowserRouter} from "react-router-dom";
+
+import App from "./App";
+import {store} from "./redux/state";
+
+import './index.css';
 
 
 const renderTree = () => {
@@ -17,7 +18,6 @@ const renderTree = () => {
                 addPost={store.addPost.bind(store)}
             />
         </BrowserRouter>,
-
         document.getElementById('root')
     );
 }

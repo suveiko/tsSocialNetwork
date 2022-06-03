@@ -1,4 +1,3 @@
-import React from "react";
 import {MyPosts} from "./myPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PostsArrayType} from "../../redux/state";
