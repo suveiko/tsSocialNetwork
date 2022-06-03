@@ -11,7 +11,7 @@ const renderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <App
-                state={store._state}
+                state={store.getState()}
                 updateNewMessageText={store.updateNewMessageText.bind(store)}
                 addMessage={store.addMessage.bind(store)}
                 updateNewPostText={store.updateNewPostText.bind(store)}

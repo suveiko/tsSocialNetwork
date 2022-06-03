@@ -31,7 +31,7 @@ export type StoreType = {
     updateNewMessageText: (newMessage: string) => void
     subscriber: (observer: () => void) => void
     renderTree: () => void
-
+    getState: () => StateType
 }
 
 export const store: StoreType = {
@@ -68,7 +68,6 @@ export const store: StoreType = {
         },
         sidebar: {}
     },
-
     addPost() {
         let newPost: PostsArrayType = {
             id: new Date().getTime(), likeCounts: 1022, message: this._state.profilePage.newPostText
@@ -78,13 +77,11 @@ export const store: StoreType = {
 
         this.renderTree()
     },
-
     updateNewPostText(newMessage: string) {
         this._state.profilePage.newPostText = newMessage
 
         this.renderTree()
     },
-
     addMessage() {
         let newMessage: MessagesArrayType = {
             id: new Date().getTime(), message: this._state.messagesPage.newMessageTextValue
@@ -94,18 +91,18 @@ export const store: StoreType = {
 
         this.renderTree()
     },
-
     updateNewMessageText(newMessage: string) {
         this._state.messagesPage.newMessageTextValue = newMessage
 
         this.renderTree()
     },
-
     subscriber(observer: () => void) {
         this.renderTree = observer
     },
-
     renderTree() {
+    },
+    getState() {
+        return this._state
     }
 }
 
