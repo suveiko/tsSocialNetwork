@@ -30,47 +30,33 @@ export type StoreType = {
     subscriber: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
-type AddPostActionType = {
-    type: 'ADD-POST'
-}
-type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newMessage: string
-}
-type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-}
-type UpdateNewMessageTextActionType = {
-    type: 'UPDATE-NEW-MESSAGE-TEXT'
-    newMessage: string
-}
 export type ActionsType =
-    AddPostActionType
-    | UpdateNewPostTextActionType
-    | AddMessageActionType
-    | UpdateNewMessageTextActionType
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof addMessageActionCreator>
+    | ReturnType<typeof updateNewMessageTextActionCreator>
 
-export const addPostActionCreator = (): AddPostActionType => {
+export const addPostActionCreator = () => {
     return {
         type: "ADD-POST"
-    }
+    } as const
 }
-export const updateNewPostTextActionCreator = (newMessage: string): UpdateNewPostTextActionType => {
+export const updateNewPostTextActionCreator = (newMessage: string) => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
         newMessage: newMessage
-    }
+    } as const
 }
-export const addMessageActionCreator = (): AddMessageActionType => {
+export const addMessageActionCreator = () => {
     return {
         type: "ADD-MESSAGE"
-    }
+    } as const
 }
-export const updateNewMessageTextActionCreator = (newMessage: string): UpdateNewMessageTextActionType => {
+export const updateNewMessageTextActionCreator = (newMessage: string) => {
     return {
         type: 'UPDATE-NEW-MESSAGE-TEXT',
         newMessage: newMessage
-    }
+    } as const
 }
 
 export const store: StoreType = {
@@ -80,8 +66,8 @@ export const store: StoreType = {
                 {id: 1, likeCounts: 10, message: 'Hello, Im Sasha'},
                 {id: 2, likeCounts: 2, message: 'Go away'},
                 {id: 3, likeCounts: 44, message: 'I like you'},
-                {id: 4, likeCounts: 2, message: 'What happend?'},
-                {id: 5, likeCounts: 130, message: 'NOOO'},
+                {id: 4, likeCounts: 2, message: 'What happening?'},
+                {id: 5, likeCounts: 130, message: 'No'},
                 {id: 6, likeCounts: 10232, message: 'YE'}
             ],
             newPostText: ''
