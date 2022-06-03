@@ -4,6 +4,6 @@ type MessageType = {
 
 export const Message = ({message}: MessageType) => {
     return (
-        <div>{message}</div>
+        <div>{message.trim()}</div>
     )
 }

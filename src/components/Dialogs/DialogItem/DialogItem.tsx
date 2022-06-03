@@ -7,7 +7,7 @@ type DialogItemType = {
 }
 
 export const DialogItem = ({name, id}: DialogItemType) => {
-    let path = '/dialogs/' + id
+    const path = '/dialogs/' + id
     return (
         <div className={`${s.dialog} ${s.active}`}>
             <NavLink to={path}>{name}</NavLink>

@@ -30,14 +30,14 @@ export type StoreType = {
     subscriber: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
-type addPostActionType = {
+type AddPostActionType = {
     type: 'ADD-POST'
 }
 type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newMessage: string
 }
-type addMessageActionType = {
+type AddMessageActionType = {
     type: 'ADD-MESSAGE'
 }
 type UpdateNewMessageTextActionType = {
@@ -45,10 +45,33 @@ type UpdateNewMessageTextActionType = {
     newMessage: string
 }
 export type ActionsType =
-    addPostActionType
+    AddPostActionType
     | UpdateNewPostTextActionType
-    | addMessageActionType
+    | AddMessageActionType
     | UpdateNewMessageTextActionType
+
+export const addPostActionCreator = (): AddPostActionType => {
+    return {
+        type: "ADD-POST"
+    }
+}
+export const updateNewPostTextActionCreator = (newMessage: string): UpdateNewPostTextActionType => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newMessage: newMessage
+    }
+}
+export const addMessageActionCreator = (): AddMessageActionType => {
+    return {
+        type: "ADD-MESSAGE"
+    }
+}
+export const updateNewMessageTextActionCreator = (newMessage: string): UpdateNewMessageTextActionType => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        newMessage: newMessage
+    }
+}
 
 export const store: StoreType = {
     _state: {
@@ -104,13 +127,15 @@ export const store: StoreType = {
 
             this._callSubscriber()
         }
+
         if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newMessage
 
             this._callSubscriber()
         }
+
         if (action.type === 'ADD-MESSAGE') {
-            let newMessage: MessagesArrayType = {
+            const newMessage: MessagesArrayType = {
                 id: new Date().getTime(), message: this._state.messagesPage.newMessageTextValue
             }
             this._state.messagesPage.messages.push(newMessage)
@@ -118,6 +143,7 @@ export const store: StoreType = {
 
             this._callSubscriber()
         }
+
         if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
             this._state.messagesPage.newMessageTextValue = action.newMessage
 

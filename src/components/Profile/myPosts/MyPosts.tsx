@@ -1,7 +1,7 @@
 import {ChangeEvent, KeyboardEvent} from "react";
 
 import {Post} from "./posts/Post";
-import {ActionsType, PostsArrayType} from "../../../redux/state";
+import {ActionsType, addPostActionCreator, PostsArrayType, updateNewPostTextActionCreator} from "../../../redux/state";
 
 import s from "./MyPosts.module.css"
 
@@ -12,7 +12,8 @@ type MyPostsType = {
 }
 
 export const MyPosts = ({posts, newPostText, dispatch}: MyPostsType) => {
-    let postsElements = posts.map((({id, message, likeCounts}) =>
+
+    const postsElements = posts.map((({id, message, likeCounts}) =>
             <Post
                 key={id}
                 message={message}
@@ -20,12 +21,12 @@ export const MyPosts = ({posts, newPostText, dispatch}: MyPostsType) => {
             />
     ))
 
-    const addPost = () => dispatch({type: "ADD-POST"})
+    const addPost = () => dispatch(addPostActionCreator())
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        e.key === 'Enter' && newPostText.trim() !== '' && dispatch({type: "ADD-POST"})
+        e.key === 'Enter' && newPostText.trim() !== '' && addPost()
     }
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch({type: 'UPDATE-NEW-POST-TEXT', newMessage: e.currentTarget.value})
+        dispatch(updateNewPostTextActionCreator(e.currentTarget.value))
     }
 
     return (
