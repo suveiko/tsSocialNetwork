@@ -73,33 +73,38 @@ export const store: StoreType = {
         let newPost: PostsArrayType = {
             id: new Date().getTime(), likeCounts: 1022, message: this._state.profilePage.newPostText
         }
-        this._state.profilePage.posts.push(newPost)
+        this._state.profilePage.posts.unshift(newPost)
         this._state.profilePage.newPostText = ''
 
         this.renderTree()
     },
+
     updateNewPostText(newMessage: string) {
         this._state.profilePage.newPostText = newMessage
 
         this.renderTree()
     },
+
     addMessage() {
         let newMessage: MessagesArrayType = {
             id: new Date().getTime(), message: this._state.messagesPage.newMessageTextValue
         }
-        this._state.messagesPage.messages.push(newMessage)
+        this._state.messagesPage.messages.unshift(newMessage)
         this._state.messagesPage.newMessageTextValue = ''
 
         this.renderTree()
     },
+
     updateNewMessageText(newMessage: string) {
         this._state.messagesPage.newMessageTextValue = newMessage
 
         this.renderTree()
     },
+
     subscriber(observer: () => void) {
         this.renderTree = observer
     },
+
     renderTree() {
     }
 }

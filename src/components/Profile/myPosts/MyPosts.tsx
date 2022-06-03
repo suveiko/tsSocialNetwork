@@ -13,16 +13,22 @@ type MyPostsType = {
 }
 
 export const MyPosts = ({posts, ...props}: MyPostsType) => {
-    let postsElements = posts.map((p => <Post key={p.id} message={p.message} likeCounts={p.likeCounts}/>))
+    let postsElements = posts.map((({id, message, likeCounts}) =>
+            <Post
+                key={id}
+                message={message}
+                likeCounts={likeCounts}
+            />
+    ))
 
-    const addPost = () => {
-        props.addPost()
-    }
+    const addPost = () => props.addPost()
+
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && props.newPostText.trim() !== '') {
             props.addPost()
         }
     }
+
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.updateNewPostText(e.currentTarget.value)
     }

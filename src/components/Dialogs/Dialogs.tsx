@@ -17,14 +17,28 @@ type DialogsPropsType = {
 }
 
 export const Dialogs = ({state, ...props}: DialogsPropsType) => {
-    const dialogsElement = state.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)
-    const messagesElement = state.messages.map(m => <Message key={m.id} message={m.message}/>)
+
+    const dialogsElement = state.dialogs.map(({id, name}) =>
+        <DialogItem
+            key={id}
+            id={id}
+            name={name}
+        />
+    )
+
+    const messagesElement = state.messages.map(({id, message}) =>
+        <Message
+            key={id}
+            message={message}
+        />
+    )
 
     const addMessage = () => props.addMessage()
 
     const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
         props.newMessageText(e.currentTarget.value)
     }
+
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && state.newMessageTextValue.trim() !== '') {
             props.addMessage()
