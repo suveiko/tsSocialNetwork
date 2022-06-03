@@ -25,14 +25,30 @@ export type StateType = {
 }
 export type StoreType = {
     _state: StateType
-    addPost: () => void
-    updateNewPostText: (newMessage: string) => void
-    addMessage: () => void
-    updateNewMessageText: (newMessage: string) => void
-    subscriber: (observer: () => void) => void
     _callSubscriber: () => void
     getState: () => StateType
+    subscriber: (observer: () => void) => void
+    dispatch: (action: ActionsType) => void
 }
+type addPostActionType = {
+    type: 'ADD-POST'
+}
+type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newMessage: string
+}
+type addMessageActionType = {
+    type: 'ADD-MESSAGE'
+}
+type UpdateNewMessageTextActionType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    newMessage: string
+}
+export type ActionsType =
+    addPostActionType
+    | UpdateNewPostTextActionType
+    | addMessageActionType
+    | UpdateNewMessageTextActionType
 
 export const store: StoreType = {
     _state: {
@@ -68,41 +84,45 @@ export const store: StoreType = {
         },
         sidebar: {}
     },
-    addPost() {
-        let newPost: PostsArrayType = {
-            id: new Date().getTime(), likeCounts: 1022, message: this._state.profilePage.newPostText
-        }
-        this._state.profilePage.posts.unshift(newPost)
-        this._state.profilePage.newPostText = ''
-
-        this._callSubscriber()
+    _callSubscriber() {
     },
-    updateNewPostText(newMessage: string) {
-        this._state.profilePage.newPostText = newMessage
 
-        this._callSubscriber()
-    },
-    addMessage() {
-        let newMessage: MessagesArrayType = {
-            id: new Date().getTime(), message: this._state.messagesPage.newMessageTextValue
-        }
-        this._state.messagesPage.messages.push(newMessage)
-        this._state.messagesPage.newMessageTextValue = ''
-
-        this._callSubscriber()
-    },
-    updateNewMessageText(newMessage: string) {
-        this._state.messagesPage.newMessageTextValue = newMessage
-
-        this._callSubscriber()
+    getState() {
+        return this._state
     },
     subscriber(observer: () => void) {
         this._callSubscriber = observer
     },
-    _callSubscriber() {
-    },
-    getState() {
-        return this._state
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostsArrayType = {
+                id: new Date().getTime(), likeCounts: 1022, message: this._state.profilePage.newPostText
+            }
+            this._state.profilePage.posts.unshift(newPost)
+            this._state.profilePage.newPostText = ''
+
+            this._callSubscriber()
+        }
+        if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newMessage
+
+            this._callSubscriber()
+        }
+        if (action.type === 'ADD-MESSAGE') {
+            let newMessage: MessagesArrayType = {
+                id: new Date().getTime(), message: this._state.messagesPage.newMessageTextValue
+            }
+            this._state.messagesPage.messages.push(newMessage)
+            this._state.messagesPage.newMessageTextValue = ''
+
+            this._callSubscriber()
+        }
+        if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.messagesPage.newMessageTextValue = action.newMessage
+
+            this._callSubscriber()
+        }
     }
 }
 

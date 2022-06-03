@@ -1,18 +1,17 @@
 import {ChangeEvent, KeyboardEvent} from "react";
 
 import {Post} from "./posts/Post";
-import {PostsArrayType} from "../../../redux/state";
+import {ActionsType, PostsArrayType} from "../../../redux/state";
 
 import s from "./MyPosts.module.css"
 
 type MyPostsType = {
     posts: PostsArrayType[]
-    addPost: () => void
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
-export const MyPosts = ({posts, ...props}: MyPostsType) => {
+export const MyPosts = ({posts, newPostText, dispatch}: MyPostsType) => {
     let postsElements = posts.map((({id, message, likeCounts}) =>
             <Post
                 key={id}
@@ -21,14 +20,12 @@ export const MyPosts = ({posts, ...props}: MyPostsType) => {
             />
     ))
 
-    const addPost = () => props.addPost()
-
+    const addPost = () => dispatch({type: "ADD-POST"})
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        e.key === 'Enter' && props.newPostText.trim() !== '' && props.addPost()
+        e.key === 'Enter' && newPostText.trim() !== '' && dispatch({type: "ADD-POST"})
     }
-
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+        dispatch({type: 'UPDATE-NEW-POST-TEXT', newMessage: e.currentTarget.value})
     }
 
     return (
@@ -37,14 +34,14 @@ export const MyPosts = ({posts, ...props}: MyPostsType) => {
             <div>
                 <div>
                     <input
-                        value={props.newPostText}
+                        value={newPostText}
                         onChange={onChangeInputHandler}
                         onKeyDown={onKeyInputHandler}
                     />
                     <button
                         style={{cursor: 'pointer'}}
                         onClick={addPost}
-                        disabled={props.newPostText.trim() === ''}
+                        disabled={newPostText.trim() === ''}
                     >
                         Submit
                     </button>

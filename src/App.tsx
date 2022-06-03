@@ -1,6 +1,6 @@
 import {Route} from "react-router-dom";
 
-import {StateType} from "./redux/state";
+import {ActionsType, StateType} from "./redux/state";
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Dialogs} from "./components/Dialogs/Dialogs";
@@ -14,13 +14,10 @@ import './App.css';
 
 type AppType = {
     state: StateType
-    updateNewMessageText: (newMessage: string) => void
-    addMessage: () => void
-    updateNewPostText: (newMessage: string) => void
-    addPost: () => void
+    dispatch: (action: ActionsType) => void
 }
 
-function App({state, updateNewMessageText, addMessage, addPost, updateNewPostText}: AppType) {
+function App({state, dispatch}: AppType) {
     return (
         <div className='app-wrapper'>
             <Header/>
@@ -29,15 +26,13 @@ function App({state, updateNewMessageText, addMessage, addPost, updateNewPostTex
                 <Route path='/dialogs' render={() =>
                     <Dialogs
                         state={state.messagesPage}
-                        newMessageText={updateNewMessageText}
-                        addMessage={addMessage}
+                        dispatch={dispatch}
                     />
                 }/>
                 <Route path='/profile' render={() =>
                     <Profile
                         state={state.profilePage}
-                        updateNewPostText={updateNewPostText}
-                        addPost={addPost}
+                        dispatch={dispatch}
                     />
                 }/>
                 <Route path='/news' render={News}/>

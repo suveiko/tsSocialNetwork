@@ -1,25 +1,23 @@
 import {MyPosts} from "./myPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostsArrayType} from "../../redux/state";
+import {ActionsType, PostsArrayType} from "../../redux/state";
 
 type ProfileType = {
     state: {
         posts: PostsArrayType[]
         newPostText: string
     }
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
-export const Profile = ({state, addPost, updateNewPostText}: ProfileType) => {
+export const Profile = ({state, dispatch}: ProfileType) => {
     return (
         <div>
             <ProfileInfo/>
             <MyPosts
                 posts={state.posts}
-                addPost={addPost}
                 newPostText={state.newPostText}
-                updateNewPostText={updateNewPostText}
+                dispatch={dispatch}
             />
         </div>
     )

@@ -2,7 +2,7 @@ import {ChangeEvent, KeyboardEvent} from "react";
 
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
-import {DialogsArrayType, MessagesArrayType} from "../../redux/state";
+import {ActionsType, DialogsArrayType, MessagesArrayType} from "../../redux/state";
 
 import s from "./Dialogs.module.css"
 
@@ -12,11 +12,10 @@ type DialogsPropsType = {
         dialogs: DialogsArrayType[]
         newMessageTextValue: string
     }
-    newMessageText: (newMessage: string) => void
-    addMessage: () => void
+    dispatch: (action: ActionsType) => void
 }
 
-export const Dialogs = ({state, ...props}: DialogsPropsType) => {
+export const Dialogs = ({state, dispatch}: DialogsPropsType) => {
 
     const dialogsElement = state.dialogs.map(({id, name}) =>
         <DialogItem
@@ -25,7 +24,6 @@ export const Dialogs = ({state, ...props}: DialogsPropsType) => {
             name={name}
         />
     )
-
     const messagesElement = state.messages.map(({id, message}) =>
         <Message
             key={id}
@@ -33,16 +31,12 @@ export const Dialogs = ({state, ...props}: DialogsPropsType) => {
         />
     )
 
-    const addMessage = () => props.addMessage()
-
+    const addMessage = () => dispatch({type: "ADD-MESSAGE"})
     const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
-        props.newMessageText(e.currentTarget.value)
+        dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage: e.currentTarget.value})
     }
-
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && state.newMessageTextValue.trim() !== '') {
-            props.addMessage()
-        }
+        e.key === 'Enter' && state.newMessageTextValue.trim() !== '' && dispatch({type: "ADD-MESSAGE"})
     }
 
     return (
