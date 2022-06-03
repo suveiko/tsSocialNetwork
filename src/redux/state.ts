@@ -30,7 +30,7 @@ export type StoreType = {
     addMessage: () => void
     updateNewMessageText: (newMessage: string) => void
     subscriber: (observer: () => void) => void
-    renderTree: () => void
+    _callSubscriber: () => void
     getState: () => StateType
 }
 
@@ -75,31 +75,31 @@ export const store: StoreType = {
         this._state.profilePage.posts.unshift(newPost)
         this._state.profilePage.newPostText = ''
 
-        this.renderTree()
+        this._callSubscriber()
     },
     updateNewPostText(newMessage: string) {
         this._state.profilePage.newPostText = newMessage
 
-        this.renderTree()
+        this._callSubscriber()
     },
     addMessage() {
         let newMessage: MessagesArrayType = {
             id: new Date().getTime(), message: this._state.messagesPage.newMessageTextValue
         }
-        this._state.messagesPage.messages.unshift(newMessage)
+        this._state.messagesPage.messages.push(newMessage)
         this._state.messagesPage.newMessageTextValue = ''
 
-        this.renderTree()
+        this._callSubscriber()
     },
     updateNewMessageText(newMessage: string) {
         this._state.messagesPage.newMessageTextValue = newMessage
 
-        this.renderTree()
+        this._callSubscriber()
     },
     subscriber(observer: () => void) {
-        this.renderTree = observer
+        this._callSubscriber = observer
     },
-    renderTree() {
+    _callSubscriber() {
     },
     getState() {
         return this._state

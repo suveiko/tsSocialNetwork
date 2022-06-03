@@ -24,9 +24,7 @@ export const MyPosts = ({posts, ...props}: MyPostsType) => {
     const addPost = () => props.addPost()
 
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && props.newPostText.trim() !== '') {
-            props.addPost()
-        }
+        e.key === 'Enter' && props.newPostText.trim() !== '' && props.addPost()
     }
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
