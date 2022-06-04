@@ -10,3 +10,11 @@
 .messages {
     padding: 20px;
 }
+
+.button {
+    cursor: pointer;
+}
+
+.button:disabled {
+    cursor: not-allowed;
+}

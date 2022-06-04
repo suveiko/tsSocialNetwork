@@ -40,7 +40,7 @@ export const MyPosts = ({posts, newPostText, dispatch}: MyPostsType) => {
                         onKeyDown={onKeyInputHandler}
                     />
                     <button
-                        style={{cursor: 'pointer'}}
+                        className={s.button}
                         onClick={addPost}
                         disabled={newPostText.trim() === ''}
                     >

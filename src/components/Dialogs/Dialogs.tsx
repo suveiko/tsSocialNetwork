@@ -53,8 +53,7 @@ export const Dialogs = ({state, dispatch}: DialogsPropsType) => {
             <div className={s.messages}>
                 {messagesElement}
             </div>
-            <button
-                style={{cursor: 'pointer'}}
+            <button className={s.button}
                 onClick={addMessage}
                 disabled={state.newMessageTextValue.trim() === ''}
             >

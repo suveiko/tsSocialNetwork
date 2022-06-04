@@ -96,7 +96,7 @@ export const store: StoreType = {
     dispatch(action) {
         if (action.type === 'ADD-POST') {
             const newPost: PostsArrayType = {
-                id: v1(), likeCounts: 1022, message: this._state.profilePage.newPostText
+                id: v1(), likeCounts: new Date().getSeconds(), message: this._state.profilePage.newPostText
             }
             this._state.profilePage.posts.unshift(newPost)
             this._state.profilePage.newPostText = ''
