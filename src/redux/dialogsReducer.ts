@@ -2,17 +2,20 @@ import {v1} from "uuid";
 import {ActionsType, MessagesArrayType, StateType} from "./state";
 
 const dialogsReducer = ({messagesPage}: StateType, action: ActionsType) => {
-    if (action.type === 'ADD-MESSAGE') {
-        const newMessage: MessagesArrayType = {
-            id: v1(), message: messagesPage.newMessageTextValue
-        }
-        messagesPage.messages.push(newMessage)
-        messagesPage.newMessageTextValue = ''
+    switch (action.type) {
+        case "ADD-MESSAGE":
+            const newMessage: MessagesArrayType = {
+                id: v1(), message: messagesPage.newMessageTextValue
+            }
+            messagesPage.messages.push(newMessage)
+            messagesPage.newMessageTextValue = ''
+            return messagesPage
+        case "UPDATE-NEW-MESSAGE-TEXT":
+            messagesPage.newMessageTextValue = action.newMessage
+            return messagesPage
+        default:
+            return messagesPage
     }
-    if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-        messagesPage.newMessageTextValue = action.newMessage
-    }
-    return messagesPage
 }
 
 export default dialogsReducer
