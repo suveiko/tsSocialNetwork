@@ -103,13 +103,11 @@ export const store: StoreType = {
 
             this._callSubscriber()
         }
-
         if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newMessage
 
             this._callSubscriber()
         }
-
         if (action.type === 'ADD-MESSAGE') {
             const newMessage: MessagesArrayType = {
                 id: v1(), message: this._state.messagesPage.newMessageTextValue
@@ -119,7 +117,6 @@ export const store: StoreType = {
 
             this._callSubscriber()
         }
-
         if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
             this._state.messagesPage.newMessageTextValue = action.newMessage
 
