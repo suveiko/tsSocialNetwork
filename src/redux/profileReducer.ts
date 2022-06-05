@@ -1,5 +1,12 @@
 import {v1} from "uuid";
+
 import {ActionsType, PostsArrayType, StateType} from "./state";
+
+export const addPostActionCreator = () => ({type: "ADD-POST"} as const)
+export const updateNewPostTextActionCreator = (newMessage: string) => ({
+    type: 'UPDATE-NEW-POST-TEXT',
+    newMessage: newMessage
+} as const)
 
 const profileReducer = ({profilePage}: StateType, action: ActionsType) => {
     switch (action.type) {

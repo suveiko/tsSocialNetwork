@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
+import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profileReducer";
+import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 
 export type PostsArrayType = {
@@ -41,17 +41,6 @@ export type ActionsType =
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof updateNewMessageTextActionCreator>
-
-export const addPostActionCreator = () => ({type: "ADD-POST"} as const)
-export const updateNewPostTextActionCreator = (newMessage: string) => ({
-    type: 'UPDATE-NEW-POST-TEXT',
-    newMessage: newMessage
-} as const)
-export const addMessageActionCreator = () => ({type: "ADD-MESSAGE"} as const)
-export const updateNewMessageTextActionCreator = (newMessage: string) => ({
-    type: 'UPDATE-NEW-MESSAGE-TEXT',
-    newMessage: newMessage
-} as const)
 
 export const store: StoreType = {
     _state: {

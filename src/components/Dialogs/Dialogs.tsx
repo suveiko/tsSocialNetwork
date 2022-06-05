@@ -4,11 +4,10 @@ import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
 import {
     ActionsType,
-    addMessageActionCreator,
     DialogsArrayType,
     MessagesArrayType,
-    updateNewMessageTextActionCreator
 } from "../../redux/state";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from '../../redux/dialogsReducer'
 
 import s from "./Dialogs.module.css"
 
@@ -54,8 +53,8 @@ export const Dialogs = ({state, dispatch}: DialogsPropsType) => {
                 {messagesElement}
             </div>
             <button className={s.button}
-                onClick={addMessage}
-                disabled={state.newMessageTextValue.trim() === ''}
+                    onClick={addMessage}
+                    disabled={state.newMessageTextValue.trim() === ''}
             >
                 Add message
             </button>
