@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {ActionsType, PostsArrayType, StateType} from "./state";
 
-export const profileReducer = ({profilePage}: StateType, action: ActionsType) => {
+const profileReducer = ({profilePage}: StateType, action: ActionsType) => {
     if (action.type === 'ADD-POST') {
         const newPost: PostsArrayType = {
             id: v1(), likeCounts: new Date().getSeconds(), message: profilePage.newPostText
@@ -15,3 +15,5 @@ export const profileReducer = ({profilePage}: StateType, action: ActionsType) =>
     }
     return profilePage
 }
+
+export default profileReducer

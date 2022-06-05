@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {ActionsType, MessagesArrayType, StateType} from "./state";
 
-export const dialogsReducer = ({messagesPage}: StateType, action: ActionsType) => {
+const dialogsReducer = ({messagesPage}: StateType, action: ActionsType) => {
     if (action.type === 'ADD-MESSAGE') {
         const newMessage: MessagesArrayType = {
             id: v1(), message: messagesPage.newMessageTextValue
@@ -14,3 +14,5 @@ export const dialogsReducer = ({messagesPage}: StateType, action: ActionsType) =
     }
     return messagesPage
 }
+
+export default dialogsReducer

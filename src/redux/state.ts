@@ -1,4 +1,7 @@
 import {v1} from "uuid";
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import sidebarReducer from "./sidebarReducer";
 
 export type PostsArrayType = {
     id: string
@@ -94,34 +97,10 @@ export const store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost: PostsArrayType = {
-                id: v1(), likeCounts: new Date().getSeconds(), message: this._state.profilePage.newPostText
-            }
-            this._state.profilePage.posts.unshift(newPost)
-            this._state.profilePage.newPostText = ''
-
-            this._callSubscriber()
-        }
-        if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newMessage
-
-            this._callSubscriber()
-        }
-        if (action.type === 'ADD-MESSAGE') {
-            const newMessage: MessagesArrayType = {
-                id: v1(), message: this._state.messagesPage.newMessageTextValue
-            }
-            this._state.messagesPage.messages.push(newMessage)
-            this._state.messagesPage.newMessageTextValue = ''
-
-            this._callSubscriber()
-        }
-        if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.messagesPage.newMessageTextValue = action.newMessage
-
-            this._callSubscriber()
-        }
+        this._state.profilePage = profileReducer(this._state, action)
+        this._state.messagesPage = dialogsReducer(this._state, action)
+        this._state.sidebar = sidebarReducer(this._state, action)
+        this._callSubscriber()
     }
 }
 
