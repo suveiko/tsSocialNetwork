@@ -9,6 +9,10 @@ export type PostsArrayType = {
     likeCounts: number
     message: string
 }
+export type ProfilePageType = {
+    posts: PostsArrayType[]
+    newPostText: string
+}
 export type MessagesArrayType = {
     id: string
     message: string
@@ -17,16 +21,14 @@ export type DialogsArrayType = {
     id: string
     name: string
 }
+export type DialogsPageType = {
+    messages: MessagesArrayType[]
+    newMessageTextValue: string
+    dialogs: DialogsArrayType[]
+}
 export type StateType = {
-    profilePage: {
-        posts: PostsArrayType[]
-        newPostText: string
-    },
-    messagesPage: {
-        messages: MessagesArrayType[]
-        newMessageTextValue: string
-        dialogs: DialogsArrayType[]
-    },
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
     sidebar: {}
 }
 export type StoreType = {
@@ -55,7 +57,7 @@ export const store: StoreType = {
             ],
             newPostText: ''
         },
-        messagesPage: {
+        dialogsPage: {
             messages: [
                 {id: v1(), message: 'Hi'},
                 {id: v1(), message: 'How are you?'},
@@ -87,8 +89,8 @@ export const store: StoreType = {
     },
 
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state, action)
-        this._state.messagesPage = dialogsReducer(this._state, action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state, action)
         this._callSubscriber()
     }

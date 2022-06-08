@@ -25,7 +25,7 @@ function App({state, dispatch}: AppType) {
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() =>
                     <Dialogs
-                        state={state.messagesPage}
+                        state={state.dialogsPage}
                         dispatch={dispatch}
                     />
                 }/>

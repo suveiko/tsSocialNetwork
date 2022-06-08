@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 
-import {ActionsType, MessagesArrayType, StateType} from "./state";
+import {ActionsType, DialogsPageType, MessagesArrayType} from "./state";
 
 export const addMessageActionCreator = () => ({type: "ADD-MESSAGE"} as const)
 export const updateNewMessageTextActionCreator = (newMessage: string) => ({
@@ -8,20 +8,20 @@ export const updateNewMessageTextActionCreator = (newMessage: string) => ({
     newMessage: newMessage
 } as const)
 
-const dialogsReducer = ({messagesPage}: StateType, action: ActionsType) => {
+const dialogsReducer = (state : DialogsPageType, action: ActionsType) => {
     switch (action.type) {
         case "ADD-MESSAGE":
             const newMessage: MessagesArrayType = {
-                id: v1(), message: messagesPage.newMessageTextValue
+                id: v1(), message: state.newMessageTextValue
             }
-            messagesPage.messages.push(newMessage)
-            messagesPage.newMessageTextValue = ''
-            return messagesPage
+            state.messages.push(newMessage)
+            state.newMessageTextValue = ''
+            return state
         case "UPDATE-NEW-MESSAGE-TEXT":
-            messagesPage.newMessageTextValue = action.newMessage
-            return messagesPage
+            state.newMessageTextValue = action.newMessage
+            return state
         default:
-            return messagesPage
+            return state
     }
 }
 

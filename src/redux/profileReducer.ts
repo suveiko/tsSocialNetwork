@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 
-import {ActionsType, PostsArrayType, StateType} from "./state";
+import {ActionsType, PostsArrayType, ProfilePageType} from "./state";
 
 export const addPostActionCreator = () => ({type: "ADD-POST"} as const)
 export const updateNewPostTextActionCreator = (newMessage: string) => ({
@@ -8,20 +8,21 @@ export const updateNewPostTextActionCreator = (newMessage: string) => ({
     newMessage: newMessage
 } as const)
 
-const profileReducer = ({profilePage}: StateType, action: ActionsType) => {
+
+const profileReducer = (state: ProfilePageType, action: ActionsType) => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostsArrayType = {
-                id: v1(), likeCounts: new Date().getSeconds(), message: profilePage.newPostText
+                id: v1(), likeCounts: new Date().getSeconds(), message: state.newPostText
             }
-            profilePage.posts.unshift(newPost)
-            profilePage.newPostText = ''
-            return profilePage
+            state.posts.unshift(newPost)
+            state.newPostText = ''
+            return state
         case "UPDATE-NEW-POST-TEXT":
-            profilePage.newPostText = action.newMessage
-            return profilePage
+            state.newPostText = action.newMessage
+            return state
         default:
-            return profilePage
+            return state
     }
 }
 
