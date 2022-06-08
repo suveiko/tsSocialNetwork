@@ -3,13 +3,7 @@ import {ChangeEvent, KeyboardEvent} from "react";
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
 
-import {
-    addMessageActionCreator,
-    DialogsArrayType,
-    MessagesArrayType,
-    updateNewMessageTextActionCreator
-} from '../../redux/dialogsReducer'
-import {ActionsType} from "../../redux/redux-store";
+import {DialogsArrayType, MessagesArrayType} from '../../redux/dialogsReducer'
 
 import s from "./Dialogs.module.css"
 
@@ -20,10 +14,11 @@ type DialogsPropsType = {
         dialogs: DialogsArrayType[]
         newMessageTextValue: string
     }
-    dispatch: (action: ActionsType) => void
+    updateNewMessageText: (newMessage: string) => void
+    addMessage: () => void
 }
 
-export const Dialogs = ({state, dispatch}: DialogsPropsType) => {
+export const Dialogs = ({updateNewMessageText, state, addMessage}: DialogsPropsType) => {
 
     const dialogsElement = state.dialogs.map(({id, name}) =>
         <DialogItem
@@ -39,12 +34,14 @@ export const Dialogs = ({state, dispatch}: DialogsPropsType) => {
         />
     )
 
-    const addMessage = () => dispatch(addMessageActionCreator())
+    const addNewMessage = () => {
+        addMessage()
+    }
     const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateNewMessageTextActionCreator(e.currentTarget.value))
+        updateNewMessageText(e.currentTarget.value)
     }
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        e.key === 'Enter' && state.newMessageTextValue.trim() !== '' && addMessage()
+        e.key === 'Enter' && state.newMessageTextValue.trim() !== '' && addNewMessage()
     }
 
     return (
@@ -56,7 +53,7 @@ export const Dialogs = ({state, dispatch}: DialogsPropsType) => {
                 {messagesElement}
             </div>
             <button className={s.button}
-                    onClick={addMessage}
+                    onClick={addNewMessage}
                     disabled={state.newMessageTextValue.trim() === ''}
             >
                 Add message

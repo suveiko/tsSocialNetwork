@@ -1,18 +1,18 @@
 import {ChangeEvent, KeyboardEvent} from "react";
 
 import {Post} from "./posts/Post";
-import {ActionsType} from "../../../redux/redux-store";
-import {updateNewPostTextActionCreator, addPostActionCreator, PostsArrayType} from '../../../redux/profileReducer'
+import {PostsArrayType} from '../../../redux/profileReducer'
 
 import s from "./MyPosts.module.css"
 
 type MyPostsType = {
     posts: PostsArrayType[]
     newPostText: string
-    dispatch: (action: ActionsType) => void
+    updateNewPostText: (text: string) => void
+    addPost: () => void
 }
 
-export const MyPosts = ({posts, newPostText, dispatch}: MyPostsType) => {
+export const MyPosts = ({posts, newPostText, updateNewPostText, addPost}: MyPostsType) => {
 
     const postsElements = posts.map((({id, message, likeCounts}) =>
             <Post
@@ -22,13 +22,11 @@ export const MyPosts = ({posts, newPostText, dispatch}: MyPostsType) => {
             />
     ))
 
-    const addPost = () => dispatch(addPostActionCreator())
+    const addNewPost = () => addPost()
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        e.key === 'Enter' && newPostText.trim() !== '' && addPost()
+        e.key === 'Enter' && newPostText.trim() !== '' && addNewPost()
     }
-    const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateNewPostTextActionCreator(e.currentTarget.value))
-    }
+    const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => updateNewPostText(e.currentTarget.value)
 
     return (
         <div className={s.postBlock}>
@@ -42,7 +40,7 @@ export const MyPosts = ({posts, newPostText, dispatch}: MyPostsType) => {
                     />
                     <button
                         className={s.button}
-                        onClick={addPost}
+                        onClick={addNewPost}
                         disabled={newPostText.trim() === ''}
                     >
                         Submit

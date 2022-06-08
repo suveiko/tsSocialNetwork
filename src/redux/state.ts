@@ -17,11 +17,6 @@ export type StoreType = {
     subscriber: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
-// export type ActionsType =
-//     ReturnType<typeof addPostActionCreator>
-//     | ReturnType<typeof updateNewPostTextActionCreator>
-//     | ReturnType<typeof addMessageActionCreator>
-//     | ReturnType<typeof updateNewMessageTextActionCreator>
 
 const store: StoreType = {
     _state: {
