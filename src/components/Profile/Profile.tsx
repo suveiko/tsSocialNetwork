@@ -1,6 +1,7 @@
 import {MyPosts} from "./myPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionsType, PostsArrayType} from "../../redux/state";
+import {PostsArrayType} from "../../redux/profileReducer";
+import {ActionsType} from "../../redux/redux-store";
 
 type ProfileType = {
     state: {

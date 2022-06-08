@@ -1,31 +1,10 @@
 import {v1} from "uuid";
 
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profileReducer";
-import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogsReducer";
+import profileReducer, {ProfilePageType} from "./profileReducer";
+import dialogsReducer, {DialogsPageType} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
+import {ActionsType} from "./redux-store";
 
-export type PostsArrayType = {
-    id: string
-    likeCounts: number
-    message: string
-}
-export type ProfilePageType = {
-    posts: PostsArrayType[]
-    newPostText: string
-}
-export type MessagesArrayType = {
-    id: string
-    message: string
-}
-export type DialogsArrayType = {
-    id: string
-    name: string
-}
-export type DialogsPageType = {
-    messages: MessagesArrayType[]
-    newMessageTextValue: string
-    dialogs: DialogsArrayType[]
-}
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
@@ -38,13 +17,13 @@ export type StoreType = {
     subscriber: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
-export type ActionsType =
-    ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
-    | ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof updateNewMessageTextActionCreator>
+// export type ActionsType =
+//     ReturnType<typeof addPostActionCreator>
+//     | ReturnType<typeof updateNewPostTextActionCreator>
+//     | ReturnType<typeof addMessageActionCreator>
+//     | ReturnType<typeof updateNewMessageTextActionCreator>
 
-export const store: StoreType = {
+const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -91,7 +70,7 @@ export const store: StoreType = {
     dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
-        this._state.sidebar = sidebarReducer(this._state, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
         this._callSubscriber()
     }
 }

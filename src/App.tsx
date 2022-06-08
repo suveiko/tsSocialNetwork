@@ -1,6 +1,6 @@
 import {Route} from "react-router-dom";
-
-import {ActionsType, StateType} from "./redux/state";
+import {ActionsType} from "./redux/redux-store";
+import {StateType} from "./redux/state";
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Dialogs} from "./components/Dialogs/Dialogs";
@@ -11,6 +11,7 @@ import {Settings} from "./components/Settings/Settings";
 import {Friends} from "./components/Friends/Friends";
 
 import './App.css';
+
 
 type AppType = {
     state: StateType
