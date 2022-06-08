@@ -7,7 +7,6 @@ import {DialogsArrayType, MessagesArrayType} from '../../redux/dialogsReducer'
 
 import s from "./Dialogs.module.css"
 
-
 type DialogsPropsType = {
     state: {
         messages: MessagesArrayType[]
@@ -34,9 +33,7 @@ export const Dialogs = ({updateNewMessageText, state, addMessage}: DialogsPropsT
         />
     )
 
-    const addNewMessage = () => {
-        addMessage()
-    }
+    const addNewMessage = () => addMessage()
     const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
         updateNewMessageText(e.currentTarget.value)
     }

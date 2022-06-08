@@ -5,7 +5,7 @@ import {MyPosts} from "./MyPosts";
 
 export const MyPostsContainer = () => {
 
-    const state = store.getState()
+    const state = store.getState().profilePage
 
     const addNewPost = () => store.dispatch(addPostActionCreator())
     const onPostChange = (text: string) => store.dispatch(updateNewPostTextActionCreator(text))
@@ -14,8 +14,8 @@ export const MyPostsContainer = () => {
         <MyPosts
             updateNewPostText={onPostChange}
             addPost={addNewPost}
-            posts={state.profilePage.posts}
-            newPostText={state.profilePage.newPostText}
+            posts={state.posts}
+            newPostText={state.newPostText}
         />
     )
 }

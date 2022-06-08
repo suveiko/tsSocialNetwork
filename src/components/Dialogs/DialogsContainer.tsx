@@ -5,7 +5,7 @@ import {Dialogs} from "./Dialogs";
 
 export const DialogsContainer = () => {
 
-    const state = store.getState()
+    const state = store.getState().dialogsPage
 
     const addMessage = () => store.dispatch(addMessageActionCreator())
     const onChangeMessage = (newMessage: string) => {
@@ -13,7 +13,7 @@ export const DialogsContainer = () => {
     }
 
     return <Dialogs
-        state={state.dialogsPage}
+        state={state}
         updateNewMessageText={onChangeMessage}
         addMessage={addMessage}
     />
