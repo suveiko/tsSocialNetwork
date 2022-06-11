@@ -1,9 +1,9 @@
 import {ChangeEvent, KeyboardEvent} from "react";
 
+import {DialogsArrayType, MessagesArrayType} from '../../redux/dialogsReducer'
+
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
-
-import {DialogsArrayType, MessagesArrayType} from '../../redux/dialogsReducer'
 
 import s from "./Dialogs.module.css"
 

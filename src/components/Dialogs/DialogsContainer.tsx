@@ -1,6 +1,6 @@
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from '../../redux/dialogsReducer'
 import {store} from "../../redux/redux-store";
 
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from '../../redux/dialogsReducer'
 import {Dialogs} from "./Dialogs";
 
 export const DialogsContainer = () => {
