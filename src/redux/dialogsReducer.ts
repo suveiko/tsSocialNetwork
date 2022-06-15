@@ -48,12 +48,11 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
             const newMessage: MessagesArrayType = {
                 id: v1(), message: state.newMessageTextValue
             }
-            state.messages.push(newMessage)
-            state.newMessageTextValue = ''
-            return {...state}
+            const newState = {...state, posts: [...state.messages]}
+            newState.messages.push(newMessage)
+            newState.newMessageTextValue = ''
+            return newState
         case "UPDATE-NEW-MESSAGE-TEXT":
-            // state.newMessageTextValue = action.newMessage
-            // return state
             return {...state, newMessageTextValue: action.newMessage}
         default:
             return state
