@@ -5,11 +5,14 @@ import {store, StoreType} from "./redux/redux-store";
 import App from "./App";
 
 import './index.css';
+import {Provider} from "react-redux";
 
 const renderTree = (state: StoreType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App/>
+            <Provider store={store}>
+                <App/>
+            </Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );
