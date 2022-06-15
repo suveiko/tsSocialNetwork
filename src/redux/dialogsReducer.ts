@@ -45,11 +45,12 @@ const initialState: DialogsPageType = {
 const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType) => {
     switch (action.type) {
         case "ADD-MESSAGE":
-            const newMessage: MessagesArrayType = {
-                id: v1(), message: state.newMessageTextValue
+            const newState = {
+                ...state, messages: [
+                    ...state.messages,
+                    {id: v1(), message: state.newMessageTextValue}
+                ]
             }
-            const newState = {...state, posts: [...state.messages]}
-            newState.messages.push(newMessage)
             newState.newMessageTextValue = ''
             return newState
         case "UPDATE-NEW-MESSAGE-TEXT":
