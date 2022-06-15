@@ -8,25 +8,26 @@ import {Message} from "./Message/Message";
 import s from "./Dialogs.module.css"
 
 type DialogsPropsType = {
-    state: {
-        messages: MessagesArrayType[]
-        dialogs: DialogsArrayType[]
-        newMessageTextValue: string
-    }
+    messages: MessagesArrayType[]
+    dialogs: DialogsArrayType[]
+    newMessageTextValue: string
     updateNewMessageText: (newMessage: string) => void
     addMessage: () => void
 }
 
-export const Dialogs = ({updateNewMessageText, state, addMessage}: DialogsPropsType) => {
+export const Dialogs = ({
+                            updateNewMessageText, dialogs, messages,
+                            newMessageTextValue, addMessage
+                        }: DialogsPropsType) => {
 
-    const dialogsElement = state.dialogs.map(({id, name}) =>
+    const dialogsElement = dialogs.map(({id, name}) =>
         <DialogItem
             key={id}
             id={id}
             name={name}
         />
     )
-    const messagesElement = state.messages.map(({id, message}) =>
+    const messagesElement = messages.map(({id, message}) =>
         <Message
             key={id}
             message={message}
@@ -38,7 +39,7 @@ export const Dialogs = ({updateNewMessageText, state, addMessage}: DialogsPropsT
         updateNewMessageText(e.currentTarget.value)
     }
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        e.key === 'Enter' && state.newMessageTextValue.trim() !== '' && addNewMessage()
+        e.key === 'Enter' && newMessageTextValue.trim() !== '' && addNewMessage()
     }
 
     return (
@@ -51,12 +52,12 @@ export const Dialogs = ({updateNewMessageText, state, addMessage}: DialogsPropsT
             </div>
             <button className={s.button}
                     onClick={addNewMessage}
-                    disabled={state.newMessageTextValue.trim() === ''}
+                    disabled={newMessageTextValue.trim() === ''}
             >
                 Add message
             </button>
             <input
-                value={state.newMessageTextValue}
+                value={newMessageTextValue}
                 onChange={onChangeMessage}
                 onKeyUp={onKeyInputHandler}
             />

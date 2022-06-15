@@ -40,7 +40,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
             state.newPostText = ''
             return {...state}
         case "UPDATE-NEW-POST-TEXT":
-            state.newPostText = action.newMessage
+            // state.newPostText = action.newMessage
             return {...state, newPostText: action.newMessage}
         default:
             return state
