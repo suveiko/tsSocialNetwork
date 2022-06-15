@@ -4,37 +4,29 @@ import s from './Navbar.module.css'
 
 
 export const Navbar = () => {
+
+    const stateForNavLink = [
+        {link: '/profile', name: 'Profile'},
+        {link: '/dialogs', name: 'Messages'},
+        {link: '/users', name: 'Users'},
+        {link: '/news', name: 'News'},
+        {link: '/music', name: 'Music'},
+        {link: '/settings', name: 'Settings'},
+        {link: '/friends', name: 'Friends'},
+    ]
+
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                <NavLink to='/profile' activeClassName={s.active}>
-                    Profile
-                </NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/dialogs' activeClassName={s.active}>
-                    Messages
-                </NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/news' activeClassName={s.active}>
-                    News
-                </NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/music' activeClassName={s.active}>
-                    Music
-                </NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/settings' activeClassName={s.active}>
-                    Settings
-                </NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/friends' activeClassName={s.active}>
-                    Friends
-                </NavLink>
+                {stateForNavLink.map(({link, name}, i) => (
+                    <NavLink
+                        key={i}
+                        to={link}
+                        activeClassName={s.active}
+                    >
+                        <div>{name}</div>
+                    </NavLink>
+                ))}
             </div>
         </nav>
     )
