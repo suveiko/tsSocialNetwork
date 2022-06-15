@@ -2,11 +2,11 @@ import {Dispatch} from "redux";
 import {connect} from "react-redux";
 
 import {StoreType} from "../../redux/redux-store";
-
 import {
     addMessageActionCreator, DialogsArrayType,
     MessagesArrayType, updateNewMessageTextActionCreator
 } from '../../redux/dialogsReducer'
+
 import {Dialogs} from "./Dialogs";
 
 
