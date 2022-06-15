@@ -10,6 +10,7 @@ import {Friends} from "./components/Friends/Friends";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 import './App.css';
+import {store} from "./redux/redux-store";
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                <Route path='/dialogs' render={() => <DialogsContainer state={store.getState().dialogsPage}/>}/>
                 <Route path='/profile' render={() => <Profile/>}/>
                 <Route path='/news' render={News}/>
                 <Route path='/music' render={Music}/>

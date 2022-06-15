@@ -1,11 +1,12 @@
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
 import {store, StoreType} from "./redux/redux-store";
 import App from "./App";
 
 import './index.css';
-import {Provider} from "react-redux";
+
 
 const renderTree = (state: StoreType) => {
     ReactDOM.render(
