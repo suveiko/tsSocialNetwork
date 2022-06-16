@@ -1,8 +1,5 @@
-import {v1} from "uuid";
-
 import {ActionsType} from "./redux-store";
 
-import avatar from '../assets/user-icon.png'
 
 export type UsersArrayType = {
     id: string
@@ -21,40 +18,7 @@ export type UsersPageType = {
 }
 
 const initialState: UsersPageType = {
-    users: [
-        {
-            id: v1(),
-            photoUrl: avatar,
-            followed: true,
-            name: 'Sasha',
-            description: 'Hello',
-            location: {country: 'Georgia', cityName: 'Tbilisi'}
-        },
-        {
-            id: v1(),
-            photoUrl: avatar,
-            followed: true,
-            name: 'Katya',
-            description: 'Hello',
-            location: {country: 'Belarus', cityName: 'Minsk'}
-        },
-        {
-            id: v1(),
-            photoUrl: avatar,
-            followed: true,
-            name: 'Kirill',
-            description: 'Im a boss',
-            location: {country: 'Ukraine', cityName: 'Kiev'}
-        },
-        {
-            id: v1(),
-            photoUrl: avatar,
-            followed: false,
-            name: 'Anton',
-            description: 'Hello',
-            location: {country: 'Georgia', cityName: 'Tbilisi'}
-        },
-    ],
+    users: [],
 }
 
 const dialogsReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
@@ -72,7 +36,7 @@ const dialogsReducer = (state: UsersPageType = initialState, action: ActionsType
                     .map(u => u.id === action.userId ? {...u, followed: false} : u)
             }
         case "SET-USERS":
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: [...action.users]}
         default:
             return state
     }

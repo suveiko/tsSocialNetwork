@@ -1,9 +1,11 @@
 import {ChangeEvent, KeyboardEvent} from "react";
 
-import {Post} from "./posts/Post";
 import {PostsArrayType} from '../../../redux/profileReducer'
 
+import {Post} from "./posts/Post";
+
 import s from "./MyPosts.module.css"
+
 
 type MyPostsType = {
     posts: PostsArrayType[]
