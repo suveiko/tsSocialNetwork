@@ -1,8 +1,10 @@
 import {combineReducers, createStore} from "redux";
+
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profileReducer";
 import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import usersReducer, {followAC, setUsersAC, unFollowAC} from "./usersReducer";
+
 
 export type ReducersType = typeof reducers
 

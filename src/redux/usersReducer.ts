@@ -2,8 +2,11 @@ import {v1} from "uuid";
 
 import {ActionsType} from "./redux-store";
 
+import avatar from '../assets/user-icon.png'
+
 export type UsersArrayType = {
     id: string
+    photoUrl: string
     followed: boolean
     name: string
     description: string
@@ -11,7 +14,7 @@ export type UsersArrayType = {
 }
 export type LocationType = {
     country: string
-    city: string
+    cityName: string
 }
 export type UsersPageType = {
     users: UsersArrayType[]
@@ -21,31 +24,35 @@ const initialState: UsersPageType = {
     users: [
         {
             id: v1(),
+            photoUrl: avatar,
             followed: true,
             name: 'Sasha',
             description: 'Hello',
-            location: {country: 'Georgia', city: 'Tbilisi'}
+            location: {country: 'Georgia', cityName: 'Tbilisi'}
         },
         {
             id: v1(),
+            photoUrl: avatar,
             followed: true,
             name: 'Katya',
             description: 'Hello',
-            location: {country: 'Belarus', city: 'Minsk'}
+            location: {country: 'Belarus', cityName: 'Minsk'}
         },
         {
             id: v1(),
+            photoUrl: avatar,
             followed: true,
             name: 'Kirill',
             description: 'Im a boss',
-            location: {country: 'Ukraine', city: 'Kiev'}
+            location: {country: 'Ukraine', cityName: 'Kiev'}
         },
         {
             id: v1(),
+            photoUrl: avatar,
             followed: false,
             name: 'Anton',
             description: 'Hello',
-            location: {country: 'Georgia', city: 'Tbilisi'}
+            location: {country: 'Georgia', cityName: 'Tbilisi'}
         },
     ],
 }
