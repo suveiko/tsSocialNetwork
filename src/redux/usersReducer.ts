@@ -50,7 +50,7 @@ const initialState: UsersPageType = {
     ],
 }
 
-const dialogsReducer = (state: UsersPageType = initialState, action: ActionsType) => {
+const dialogsReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
     switch (action.type) {
         case 'FOLLOW':
             return {
@@ -64,13 +64,16 @@ const dialogsReducer = (state: UsersPageType = initialState, action: ActionsType
                 users: state.users
                     .map(u => u.id === action.userId ? {...u, followed: false} : u)
             }
+        case "SET-USERS":
+            return {...state, users: [...state.users, ...action.users]}
         default:
             return state
     }
 }
 
 
-export const followAC = (userId: string) => ({type: 'FOLLOW', userId: userId} as const)
+export const followAC = (userId: string) => ({type: 'FOLLOW', userId} as const)
 export const unFollowAC = (userId: string) => ({type: 'UNFOLLOW', userId} as const)
+export const setUsersAC = (users: UsersArrayType[]) => ({type: 'SET-USERS', users} as const)
 
 export default dialogsReducer

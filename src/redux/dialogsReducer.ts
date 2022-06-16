@@ -2,11 +2,6 @@ import {v1} from "uuid";
 
 import {ActionsType} from "./redux-store";
 
-export const addMessageActionCreator = () => ({type: "ADD-MESSAGE"} as const)
-export const updateNewMessageTextActionCreator = (newMessage: string) => ({
-    type: 'UPDATE-NEW-MESSAGE-TEXT',
-    newMessage: newMessage
-} as const)
 
 export type MessagesArrayType = {
     id: string
@@ -59,5 +54,13 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
             return state
     }
 }
+
+
+export const addMessageActionCreator = () => ({type: "ADD-MESSAGE"} as const)
+export const updateNewMessageTextActionCreator = (newMessage: string) => ({
+    type: 'UPDATE-NEW-MESSAGE-TEXT',
+    newMessage: newMessage
+} as const)
+
 
 export default dialogsReducer

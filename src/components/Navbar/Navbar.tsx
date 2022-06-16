@@ -18,15 +18,17 @@ export const Navbar = () => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                {stateForNavLink.map(({link, name}, i) => (
-                    <NavLink
-                        key={i}
-                        to={link}
-                        activeClassName={s.active}
-                    >
-                        <div>{name}</div>
-                    </NavLink>
-                ))}
+                {stateForNavLink.map(({link, name}, i) => {
+                    return (
+                        <NavLink
+                            key={i}
+                            to={link}
+                            activeClassName={s.active}
+                        >
+                            <div>{name}</div>
+                        </NavLink>
+                    )
+                })}
             </div>
         </nav>
     )
