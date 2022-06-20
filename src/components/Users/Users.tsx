@@ -52,7 +52,8 @@ export const Users = ({users, follow, unFollow, setUsers}: UsersType) => {
 
     return (
         <span>
-            {users.map((u, i) => <div key={i}>
+            {
+                users.map((u, i) => <div key={i}>
                 <span>
                     <div>
                         <img
@@ -69,7 +70,7 @@ export const Users = ({users, follow, unFollow, setUsers}: UsersType) => {
                         }
                     </div>
                 </span>
-                <span>
+                        <span>
                     <span>
                         <div>{u.name}</div>
                         <div>{u.description}</div>
@@ -79,7 +80,8 @@ export const Users = ({users, follow, unFollow, setUsers}: UsersType) => {
                         <div>{u.location.cityName}</div>
                     </span>
                 </span>
-            </div>)}
+                    </div>
+                )}
         </span>
     )
 }
