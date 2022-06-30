@@ -9,3 +9,12 @@
     width: 65px;
     cursor: pointer;
 }
+
+.selectedPage {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.page {
+    cursor: pointer;
+}

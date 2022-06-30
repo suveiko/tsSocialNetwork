@@ -12,22 +12,54 @@ type UsersType = {
     follow: (userId: string) => void
     unFollow: (userId: string) => void
     setUsers: (users: UsersArrayType[]) => void
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    setCurrentPage: (currentPage: number) => void
+    setTotalUsersCount: (count: number) => void
 }
 
 
 class Users extends React.Component<UsersType> {
 
     componentDidMount() {
-        this.props.users.length === 0 && axios
-            .get("https://social-network.samuraijs.com/api/1.0/users")
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })
+    }
+
+    onPageChanged = (page: number) => {
+        this.props.setCurrentPage(page)
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
             .then(response => this.props.setUsers(response.data.items))
     }
 
     render() {
+        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        const pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
+
         return (
             <div>
-                {
-                    this.props.users.map(u => <div key={u.id}>
+                <div>
+                    {
+                        pages.map(p => (
+                            <span
+                                onClick={() => this.onPageChanged(p)}
+                                className={this.props.currentPage === p ? s.selectedPage : s.page}
+                            >{p}
+                            </span>
+                        ))
+                    }
+                </div>
+                {this.props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
                         <img
@@ -54,9 +86,8 @@ class Users extends React.Component<UsersType> {
                         }
                     </div>
                 </span>
-                            <span>
+                        <span>
                     <span>
-                        {this.props.children}
                         <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
@@ -66,8 +97,8 @@ class Users extends React.Component<UsersType> {
                             </span>
 
                 </span>
-                        </div>
-                    )}
+                    </div>
+                )}
             </div>
         )
     }
