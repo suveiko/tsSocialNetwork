@@ -1,18 +1,15 @@
 import {ChangeEvent, KeyboardEvent} from "react";
 
-import {PostsArrayType} from '../../../redux/profileReducer'
-
+import {MapStateToPropsType} from "./MyPostsContainer";
 import {Post} from "./posts/Post";
 
 import s from "./MyPosts.module.css"
 
 
 type MyPostsType = {
-    posts: PostsArrayType[]
-    newPostText: string
     updateNewPostText: (text: string) => void
     addPost: () => void
-}
+} & MapStateToPropsType
 
 export const MyPosts = ({posts, newPostText, updateNewPostText, addPost}: MyPostsType) => {
 

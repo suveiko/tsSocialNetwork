@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from "redux";
 
-import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from "./profileReducer";
+import {addPost, profileReducer, updateNewPostText,} from "./profileReducer";
 import {addMessage, dialogsReducer, updateNewMessageText} from "./dialogsReducer";
 import {
     follow, setCurrentPage,
@@ -15,8 +15,8 @@ export type ReducersType = typeof reducers
 
 export type StoreType = ReturnType<ReducersType>
 
-export type ActionsType = ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
+export type ActionsType = ReturnType<typeof addPost>
+    | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof addMessage>
     | ReturnType<typeof updateNewMessageText>
     | ReturnType<typeof follow>

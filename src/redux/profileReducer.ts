@@ -44,8 +44,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 }
 
 
-export const addPostActionCreator = () => ({type: "ADD-POST"} as const)
-export const updateNewPostTextActionCreator = (newMessage: string) => ({
+export const addPost = () => ({type: "ADD-POST"} as const)
+export const updateNewPostText = (newMessage: string) => ({
     type: 'UPDATE-NEW-POST-TEXT',
     newMessage: newMessage
 } as const)
