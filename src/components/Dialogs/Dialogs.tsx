@@ -1,19 +1,17 @@
 import {ChangeEvent, KeyboardEvent} from "react";
 
-import {DialogsArrayType, MessagesArrayType} from '../../redux/dialogsReducer'
+import {MapStateToPropsType} from "./DialogsContainer";
 
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
 
 import s from "./Dialogs.module.css"
 
+
 type DialogsPropsType = {
-    messages: MessagesArrayType[]
-    dialogs: DialogsArrayType[]
-    newMessageTextValue: string
     updateNewMessageText: (newMessage: string) => void
     addMessage: () => void
-}
+} & MapStateToPropsType
 
 export const Dialogs = ({
                             updateNewMessageText, dialogs, messages,

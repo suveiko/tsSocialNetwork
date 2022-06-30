@@ -80,12 +80,8 @@ const mapStateToProps = (state: StoreType): MapStateToPropsType => {
 }
 
 const mapDispatchToProps = {
-    follow,
-    unFollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    toggleIsFetching,
+    follow, unFollow, setUsers,
+    setCurrentPage, setTotalUsersCount, toggleIsFetching,
 }
 
 
