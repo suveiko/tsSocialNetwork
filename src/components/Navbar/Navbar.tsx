@@ -9,10 +9,6 @@ export const Navbar = () => {
         {link: '/profile', name: 'Profile'},
         {link: '/dialogs', name: 'Messages'},
         {link: '/users', name: 'Users'},
-        {link: '/news', name: 'News'},
-        {link: '/music', name: 'Music'},
-        {link: '/settings', name: 'Settings'},
-        {link: '/friends', name: 'Friends'},
     ]
 
     return (
