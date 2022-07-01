@@ -1,6 +1,7 @@
 import avatar from '../../assets/user-icon.png'
 import s from './Users.module.css'
 import {UsersType} from "./UsersContainer";
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     onPageChanged: (page: number) => void
@@ -10,7 +11,7 @@ const Users = ({
                    totalUsersCount, pageSize,
                    onPageChanged, currentPage,
                    users, unFollow, follow
-}: UsersPropsType) => {
+               }: UsersPropsType) => {
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
     const pages = []
@@ -24,6 +25,7 @@ const Users = ({
                 {
                     pages.map(p => (
                         <span
+                            key={`${currentPage}-${p}`}
                             onClick={() => onPageChanged(p)}
                             className={currentPage === p ? s.selectedPage : s.page}
                         >{p}
@@ -31,14 +33,17 @@ const Users = ({
                     ))
                 }
             </div>
-            {users.map(u => <div key={u.id}>
+            {
+                users.map(u => <div key={u.id}>
             <span>
                 <div>
-                    <img
-                        src={u.photos.small !== null ? u.photos.small : avatar}
-                        alt="avatar"
-                        className={s.userPhoto}
-                    />
+                    <NavLink to={'/profile/' + u.id}>
+                        <img
+                            src={u.photos.small !== null ? u.photos.small : avatar}
+                            alt="avatar"
+                            className={s.userPhoto}
+                        />
+                    </NavLink>
                 </div>
                 <div>
                     {

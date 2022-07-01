@@ -1,12 +1,21 @@
+import {ReactNode} from "react";
+
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./myPosts/MyPostsContainer";
+import {ProfileUserType} from "../../redux/profileReducer";
 
 
-export const Profile = () => {
+type ProfileType = {
+    children?: ReactNode
+    profile: ProfileUserType
+}
+
+export const Profile = ({children, profile}: ProfileType) => {
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile={profile}/>
             <MyPostsContainer/>
+            {children}
         </div>
     )
 }

@@ -13,13 +13,6 @@ import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 
 
-export type MapStateToPropsType = {
-    users: UsersArrayType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-}
 export type MapDispatchToPropsType = {
     follow: (userId: string) => void
     unFollow: (userId: string) => void
@@ -28,7 +21,7 @@ export type MapDispatchToPropsType = {
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
 }
-export type UsersType = MapStateToPropsType & MapDispatchToPropsType
+export type UsersType = ReturnType<typeof mapStateToProps> & MapDispatchToPropsType
 
 
 class UsersComponent extends React.Component<UsersType> {
@@ -69,7 +62,7 @@ class UsersComponent extends React.Component<UsersType> {
     }
 }
 
-const mapStateToProps = (state: StoreType): MapStateToPropsType => {
+const mapStateToProps = (state: StoreType) => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

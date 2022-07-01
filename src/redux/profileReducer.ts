@@ -8,9 +8,31 @@ export type PostsArrayType = {
     likeCounts: number
     message: string
 }
+export type ProfileUserType = {
+    aboutMe: string
+    contacts: {
+        facebook: string
+        website: string
+        vk: string
+        twitter: string
+        instagram: string
+        youtube: string
+        github: string
+        mainLink: string
+    },
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: {
+        small: string
+        large: string
+    }
+}
 export type ProfilePageType = {
     posts: PostsArrayType[]
     newPostText: string
+    profile: ProfileUserType
 }
 
 const initialState: ProfilePageType = {
@@ -22,7 +44,28 @@ const initialState: ProfilePageType = {
         {id: v1(), likeCounts: 130, message: 'No'},
         {id: v1(), likeCounts: 10232, message: 'YE'}
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: {
+        aboutMe: '',
+        contacts: {
+            facebook: '',
+            website: '',
+            vk: '',
+            twitter: '',
+            instagram: '',
+            youtube: '',
+            github: '',
+            mainLink: '',
+        },
+        lookingForAJob: true,
+        lookingForAJobDescription: '',
+        fullName: '',
+        userId: 1,
+        photos: {
+            small: '',
+            large: '',
+        }
+    }
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
@@ -38,6 +81,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             }
         case "UPDATE-NEW-POST-TEXT":
             return {...state, newPostText: action.newMessage}
+        case "SET-USER-PROFILE":
+            return {...state, profile: action.profile}
         default:
             return state
     }
@@ -45,8 +90,6 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 
 
 export const addPost = () => ({type: "ADD-POST"} as const)
-export const updateNewPostText = (newMessage: string) => ({
-    type: 'UPDATE-NEW-POST-TEXT',
-    newMessage: newMessage
-} as const)
+export const updateNewPostText = (newMessage: string) => ({type: "UPDATE-NEW-POST-TEXT", newMessage} as const)
+export const setUserProfile = (profile: ProfileUserType) => ({type: "SET-USER-PROFILE", profile} as const)
 

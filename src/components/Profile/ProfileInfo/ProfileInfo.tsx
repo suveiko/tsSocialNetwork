@@ -1,7 +1,20 @@
+import Preloader from "../../common/Preloader/Preloader";
+
+import {ProfileUserType} from "../../../redux/profileReducer";
+
 import s from "./ProfileInfo.module.css";
+import avatar from "../../../assets/user-icon.png"
 
 
-export const ProfileInfo = () => {
+type ProfileInfo = {
+    profile: ProfileUserType
+}
+
+export const ProfileInfo = ({profile}: ProfileInfo) => {
+    if (!profile) {
+        return <Preloader/>
+    }
+
     return (
         <div>
             <div>
@@ -12,7 +25,14 @@ export const ProfileInfo = () => {
                 />
             </div>
             <div className={s.descriptionBlock}>
-                ava+description
+                <img
+                    className={s.userPhoto}
+                    src={!profile.photos.small ? avatar : profile.photos.small}
+                    alt="avatar"
+                />
+                <div>{profile.fullName}</div>
+                <div>{profile.aboutMe}</div>
+                <div>My Github - {profile.contacts.github}</div>
             </div>
         </div>
     )
