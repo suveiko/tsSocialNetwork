@@ -1,7 +1,9 @@
+import {NavLink} from "react-router-dom";
+
+import {UsersType} from "./UsersContainer";
+
 import avatar from '../../assets/user-icon.png'
 import s from './Users.module.css'
-import {UsersType} from "./UsersContainer";
-import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     onPageChanged: (page: number) => void
