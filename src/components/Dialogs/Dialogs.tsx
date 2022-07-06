@@ -1,6 +1,6 @@
 import {ChangeEvent, KeyboardEvent} from "react";
 
-import {MapStateToPropsType} from "./DialogsContainer";
+import {DialogsContainerType} from "./DialogsContainer";
 
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
@@ -8,15 +8,10 @@ import {Message} from "./Message/Message";
 import s from "./Dialogs.module.css"
 
 
-type DialogsPropsType = {
-    updateNewMessageText: (newMessage: string) => void
-    addMessage: () => void
-} & MapStateToPropsType
-
 export const Dialogs = ({
                             updateNewMessageText, dialogs, messages,
                             newMessageTextValue, addMessage
-                        }: DialogsPropsType) => {
+                        }: DialogsContainerType) => {
 
     const dialogsElement = dialogs.map(({id, name}) =>
         <DialogItem

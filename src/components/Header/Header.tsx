@@ -1,8 +1,12 @@
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
+import {HeaderComponentType} from "./HeaderContainer";
 
 
-export const Header = () => {
+export const Header = ({data}: HeaderComponentType) => {
+
+    const {isAuth, id, login, email} = data
+
     return (
         <header className={s.header}>
             <img
@@ -11,7 +15,12 @@ export const Header = () => {
             />
 
             <div className={s.loginBlock}>
-                <NavLink to={'/login'}>Login</NavLink>
+                {
+                    isAuth
+                        ? login
+                        : <NavLink to={'/login'}>Login</NavLink>
+                }
+
             </div>
         </header>
     )

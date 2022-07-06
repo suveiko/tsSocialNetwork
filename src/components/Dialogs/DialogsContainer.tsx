@@ -11,6 +11,8 @@ export type MapStateToPropsType = {
     messages: MessagesArrayType[]
     newMessageTextValue: string
 }
+export type DialogsContainerType = MapStateToPropsType & typeof mapDispatchToProps
+
 
 const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     return {
@@ -20,5 +22,6 @@ const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     }
 }
 const mapDispatchToProps = {addMessage, updateNewMessageText}
+
 
 export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
