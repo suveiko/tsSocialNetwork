@@ -1,14 +1,19 @@
 import {ActionsType} from "./redux-store";
 
 
-const initialState = {
-    id: null,
-    login: null,
-    email: null
+export type AuthReducerDataType = {
+    id: number
+    login: string
+    email: string
+}
+const initialState: AuthReducerDataType = {
+    id: 0,
+    login: '',
+    email: ''
 }
 
 
-export const authReducer = (state: typeof initialState = initialState, action: ActionsType) => {
+export const authReducer = (state: AuthReducerDataType = initialState, action: ActionsType): AuthReducerDataType => {
     switch (action.type) {
         case 'SET-USERS-DATA':
             return {
@@ -20,4 +25,4 @@ export const authReducer = (state: typeof initialState = initialState, action: A
     }
 }
 
-export const setUserData = (data: typeof initialState) => ({type: 'SET-USERS-DATA', data} as const)
+export const setAuthUserData = (data: AuthReducerDataType) => ({type: 'SET-USERS-DATA', data} as const)

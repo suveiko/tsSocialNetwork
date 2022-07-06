@@ -9,7 +9,7 @@ import {
     usersReducer
 } from "./usersReducer";
 import {sidebarReducer} from "./sidebarReducer";
-import {authReducer, setUserData} from "./authReducer";
+import {authReducer, setAuthUserData} from "./authReducer";
 
 
 export type ReducersType = typeof reducers
@@ -27,7 +27,7 @@ export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setUserData>
+    | ReturnType<typeof setAuthUserData>
 
 
 const reducers = combineReducers({
