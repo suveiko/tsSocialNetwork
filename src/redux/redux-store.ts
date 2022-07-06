@@ -4,7 +4,7 @@ import {addPost, profileReducer, setUserProfile, updateNewPostText,} from "./pro
 import {addMessage, dialogsReducer, updateNewMessageText} from "./dialogsReducer";
 import {
     follow, setCurrentPage,
-    setTotalUsersCount, setUsers,
+    setTotalUsersCount, setUsers, toggleFollowingProgress,
     toggleIsFetching, unFollow,
     usersReducer
 } from "./usersReducer";
@@ -28,6 +28,7 @@ export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof toggleFollowingProgress>
 
 
 const reducers = combineReducers({

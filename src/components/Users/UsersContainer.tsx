@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
 import {
     follow, setCurrentPage,
-    setTotalUsersCount, setUsers,
+    setTotalUsersCount, setUsers, toggleFollowingProgress,
     toggleIsFetching, unFollow, UsersArrayType
 } from "../../redux/usersReducer";
 
@@ -21,6 +21,7 @@ export type MapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingProgress: (isFetching: boolean) => void
 }
 export type UsersType = ReturnType<typeof mapStateToProps> & MapDispatchToPropsType
 
@@ -65,13 +66,15 @@ const mapStateToProps = (state: StoreType) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
 const mapDispatchToProps = {
     follow, unFollow, setUsers,
     setCurrentPage, setTotalUsersCount, toggleIsFetching,
+    toggleFollowingProgress
 }
 
 

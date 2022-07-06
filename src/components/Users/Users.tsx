@@ -17,6 +17,8 @@ const Users = ({
                    totalUsersCount, pageSize,
                    onPageChanged, currentPage,
                    users, unFollow, follow,
+                   toggleFollowingProgress,
+                   followingInProgress
                }: UsersPropsType) => {
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -26,10 +28,18 @@ const Users = ({
     }
 
     const onClickUnFollowFromUser = (id: string) => {
-        usersAPI.unFollowFromUser(id).then(data => data.resultCode === 0 && unFollow(id))
+        toggleFollowingProgress(true)
+        usersAPI.unFollowFromUser(id).then(data => {
+            data.resultCode === 0 && unFollow(id)
+            toggleFollowingProgress(false)
+        })
     }
     const onClickFollowOnUser = (id: string) => {
-        usersAPI.followOnUser(id).then(data => data.resultCode === 0 && follow(id))
+        toggleFollowingProgress(true)
+        usersAPI.followOnUser(id).then(data => {
+            data.resultCode === 0 && follow(id)
+            toggleFollowingProgress(false)
+        })
     }
 
 
@@ -65,12 +75,14 @@ const Users = ({
                             ? <button
                                 className={s.btnStyle}
                                 onClick={() => onClickUnFollowFromUser(u.id)}
+                                disabled={followingInProgress}
                             >
                                 Unfollow
                             </button>
                             : <button
                                 className={s.btnStyle}
                                 onClick={() => onClickFollowOnUser(u.id)}
+                                disabled={followingInProgress}
                             >
                                 Follow
                             </button>
