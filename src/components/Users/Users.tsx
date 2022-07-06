@@ -4,7 +4,8 @@ import {UsersType} from "./UsersContainer";
 
 import avatar from '../../assets/user-icon.png'
 import s from './Users.module.css'
-import axios from "axios";
+
+import {usersAPI} from "../../api/api";
 
 
 type UsersPropsType = {
@@ -23,6 +24,14 @@ const Users = ({
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+
+    const onClickUnFollowFromUser = (id: string) => {
+        usersAPI.unFollowFromUser(id).then(data => data.resultCode === 0 && unFollow(id))
+    }
+    const onClickFollowOnUser = (id: string) => {
+        usersAPI.followOnUser(id).then(data => data.resultCode === 0 && follow(id))
+    }
+
 
     return (
         <div>
@@ -55,39 +64,13 @@ const Users = ({
                         u.followed
                             ? <button
                                 className={s.btnStyle}
-                                onClick={() => {
-                                    axios
-                                        .delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                            withCredentials: true,
-                                            headers: {
-                                                "API-KEY": "d109b0c8-ad95-4d03-855f-a4cafa3fa08d"
-                                            }
-                                        })
-                                        .then(response => {
-                                            if (response.data.resultCode === 0) {
-                                                unFollow(u.id)
-                                            }
-                                        })
-                                }}
+                                onClick={() => onClickUnFollowFromUser(u.id)}
                             >
                                 Unfollow
                             </button>
                             : <button
                                 className={s.btnStyle}
-                                onClick={() => {
-                                    axios
-                                        .post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                            withCredentials: true,
-                                            headers: {
-                                                "API-KEY": "d109b0c8-ad95-4d03-855f-a4cafa3fa08d"
-                                            }
-                                        })
-                                        .then(response => {
-                                            if (response.data.resultCode === 0) {
-                                                follow(u.id)
-                                            }
-                                        })
-                                }}
+                                onClick={() => onClickFollowOnUser(u.id)}
                             >
                                 Follow
                             </button>
