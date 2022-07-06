@@ -28,17 +28,17 @@ const Users = ({
     }
 
     const onClickUnFollowFromUser = (id: string) => {
-        toggleFollowingProgress(true)
+        toggleFollowingProgress(true, id)
         usersAPI.unFollowFromUser(id).then(data => {
             data.resultCode === 0 && unFollow(id)
-            toggleFollowingProgress(false)
+            toggleFollowingProgress(false, id)
         })
     }
     const onClickFollowOnUser = (id: string) => {
-        toggleFollowingProgress(true)
+        toggleFollowingProgress(true, id)
         usersAPI.followOnUser(id).then(data => {
             data.resultCode === 0 && follow(id)
-            toggleFollowingProgress(false)
+            toggleFollowingProgress(false, id)
         })
     }
 
@@ -75,14 +75,14 @@ const Users = ({
                             ? <button
                                 className={s.btnStyle}
                                 onClick={() => onClickUnFollowFromUser(u.id)}
-                                disabled={followingInProgress}
+                                disabled={followingInProgress.some(id => id === u.id)}
                             >
                                 Unfollow
                             </button>
                             : <button
                                 className={s.btnStyle}
                                 onClick={() => onClickFollowOnUser(u.id)}
-                                disabled={followingInProgress}
+                                disabled={followingInProgress.some(id => id === u.id)}
                             >
                                 Follow
                             </button>
