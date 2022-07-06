@@ -9,6 +9,7 @@ import {
     usersReducer
 } from "./usersReducer";
 import {sidebarReducer} from "./sidebarReducer";
+import {authReducer, setUserData} from "./authReducer";
 
 
 export type ReducersType = typeof reducers
@@ -26,13 +27,15 @@ export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setUserData>
 
 
 const reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
-    sidebar: sidebarReducer
+    sidebar: sidebarReducer,
+    auth: authReducer
 })
 
 export const store = createStore(reducers)

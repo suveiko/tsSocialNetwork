@@ -1,5 +1,6 @@
 import s from './Post.module.css';
 
+
 type PostType = {
     message: string
     likeCounts: number

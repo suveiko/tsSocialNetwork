@@ -2,6 +2,7 @@ import {NavLink} from "react-router-dom";
 
 import s from "./DialogItem.module.css"
 
+
 type DialogItemType = {
     name: string
     id: string
