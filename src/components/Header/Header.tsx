@@ -5,7 +5,7 @@ import {HeaderComponentType} from "./HeaderContainer";
 
 export const Header = ({data}: HeaderComponentType) => {
 
-    const {isAuth, id, login, email} = data
+    const {isAuth, login} = data
 
     return (
         <header className={s.header}>
