@@ -4,11 +4,11 @@ import {addPost, profileReducer, setUserProfile, updateNewPostText,} from "./pro
 import {addMessage, dialogsReducer, updateNewMessageText} from "./dialogsReducer";
 import {
     follow, setCurrentPage,
-    setTotalUsersCount, setUsers, toggleFollowingProgress,
+    setTotalUsersCount, setUsers,
+    toggleFollowingProgress,
     toggleIsFetching, unFollow,
     usersReducer
 } from "./usersReducer";
-import {sidebarReducer} from "./sidebarReducer";
 import {authReducer, setAuthUserData} from "./authReducer";
 
 
@@ -35,7 +35,6 @@ const reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
-    sidebar: sidebarReducer,
     auth: authReducer
 })
 
