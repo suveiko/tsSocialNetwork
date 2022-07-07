@@ -1,15 +1,10 @@
 import {ChangeEvent, KeyboardEvent} from "react";
 
-import {MapStateToPropsType} from "./MyPostsContainer";
+import {MyPostsType} from "./MyPostsContainer";
 import {Post} from "./posts/Post";
 
 import s from "./MyPosts.module.css"
 
-
-type MyPostsType = {
-    updateNewPostText: (text: string) => void
-    addPost: () => void
-} & MapStateToPropsType
 
 export const MyPosts = ({posts, newPostText, updateNewPostText, addPost}: MyPostsType) => {
 

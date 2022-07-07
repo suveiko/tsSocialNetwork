@@ -11,7 +11,6 @@ import {HeaderContainer} from "./components/Header/HeaderContainer";
 import './App.css';
 
 
-
 function App() {
     return (
         <div className='app-wrapper'>

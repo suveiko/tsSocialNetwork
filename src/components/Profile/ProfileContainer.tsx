@@ -5,20 +5,14 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {Profile} from "./Profile";
 
 import {StoreType} from "../../redux/redux-store";
-import {ProfileUserType, setUserProfile} from "../../redux/profileReducer";
+import {setUserProfile} from "../../redux/profileReducer";
 
 import {usersAPI} from "../../api/api";
 
 
-type ParamsType = {
-    userId: string
-}
-export type MapDispatchToPropsType = {
-    setUserProfile: (profile: ProfileUserType) => void
-}
 export type ProfileType = ReturnType<typeof mapStateToProps>
-    & MapDispatchToPropsType
-    & RouteComponentProps<ParamsType>
+    & typeof mapDispatchToProps
+    & RouteComponentProps<{ userId: string }>
 
 
 class ProfileComponent extends React.Component<ProfileType> {
@@ -36,7 +30,7 @@ class ProfileComponent extends React.Component<ProfileType> {
     }
 }
 
-const mapStateToProps = (state: StoreType) => ({profile: state.profilePage.profile})
+const mapStateToProps = (state: StoreType) => ({profile: state.profilePage.profile} as const)
 const mapDispatchToProps = {setUserProfile}
 
 const withUrlDataContainerComponent = withRouter(ProfileComponent as any)

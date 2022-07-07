@@ -4,15 +4,12 @@ import {connect} from "react-redux";
 import {Header} from "./Header";
 
 import {StoreType} from "../../redux/redux-store";
-import {AuthReducerDataType, setAuthUserData} from "../../redux/authReducer";
+import {setAuthUserData} from "../../redux/authReducer";
 
 import {usersAPI} from "../../api/api";
 
 
-export type MapStateToPropsType = {
-    data: AuthReducerDataType
-}
-export type HeaderComponentType = MapStateToPropsType & typeof mapDispatchToProps
+export type HeaderComponentType = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 
 
 class HeaderComponent extends React.Component<HeaderComponentType> {
@@ -30,11 +27,7 @@ class HeaderComponent extends React.Component<HeaderComponentType> {
     }
 }
 
-const mapStateToProps = (state: StoreType): MapStateToPropsType => {
-    return {
-        data: state.auth
-    }
-}
+const mapStateToProps = (state: StoreType) => ({data: state.auth} as const)
 const mapDispatchToProps = {setAuthUserData}
 
 export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderComponent as any)

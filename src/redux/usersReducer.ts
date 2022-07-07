@@ -19,7 +19,7 @@ export type UsersPageType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: Array<string| boolean>
+    followingInProgress: Array<string | boolean>
 }
 export type PhotosType = {
     small: string

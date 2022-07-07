@@ -4,26 +4,19 @@ import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
 import {
     follow, setCurrentPage,
-    setTotalUsersCount, setUsers, toggleFollowingProgress,
-    toggleIsFetching, unFollow, UsersArrayType
+    setTotalUsersCount, setUsers,
+    toggleFollowingProgress,
+    toggleIsFetching, unFollow,
 } from "../../redux/usersReducer";
 
 import Users from "./Users";
-import Preloader from "../common/Preloader/Preloader";
 
 import {usersAPI} from "../../api/api";
 
+import Preloader from "../common/Preloader/Preloader";
 
-export type MapDispatchToPropsType = {
-    follow: (userId: string) => void
-    unFollow: (userId: string) => void
-    setUsers: (users: UsersArrayType[]) => void
-    setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-    toggleFollowingProgress: (isFetching: boolean, userId: string) => void
-}
-export type UsersType = ReturnType<typeof mapStateToProps> & MapDispatchToPropsType
+
+export type UsersType = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 
 
 class UsersComponent extends React.Component<UsersType> {
@@ -68,7 +61,7 @@ const mapStateToProps = (state: StoreType) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress
-    }
+    } as const
 }
 
 const mapDispatchToProps = {
