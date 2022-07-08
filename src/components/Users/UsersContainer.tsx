@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
 import {
     getUsers, onChangeUsers,
-    unFollowFromUser, FollowOnUser
+    unFollowFromUser, followOnUser
 } from "../../redux/usersReducer";
 
 import Users from "./Users";
@@ -53,7 +53,7 @@ const mapStateToProps = (state: StoreType) => {
 
 const mapDispatchToProps = {
     getUsers, onChangeUsers,
-    unFollowFromUser, FollowOnUser
+    unFollowFromUser, followOnUser
 }
 
 

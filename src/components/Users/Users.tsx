@@ -14,7 +14,7 @@ type UsersPropsType = {
 const Users = ({
                    totalUsersCount, pageSize,
                    onPageChanged, currentPage,
-                   users, FollowOnUser,
+                   users, followOnUser,
                    followingInProgress,
                    unFollowFromUser
                }: UsersPropsType) => {
@@ -26,7 +26,7 @@ const Users = ({
     }
 
     const onClickUnFollowFromUser = (id: string) => unFollowFromUser(id)
-    const onClickFollowOnUser = (id: string) => FollowOnUser(id)
+    const onClickFollowOnUser = (id: string) => followOnUser(id)
 
     return (
         <div>

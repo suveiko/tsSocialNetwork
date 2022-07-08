@@ -4,9 +4,7 @@ import {connect} from "react-redux";
 import {Header} from "./Header";
 
 import {StoreType} from "../../redux/redux-store";
-import {setAuthUserData} from "../../redux/authReducer";
-
-import {usersAPI} from "../../api/api";
+import {redirectToUsersPage} from "../../redux/authReducer";
 
 
 export type HeaderComponentType = ReturnType<typeof mapStateToProps>
@@ -15,12 +13,7 @@ export type HeaderComponentType = ReturnType<typeof mapStateToProps>
 
 class HeaderComponent extends React.Component<HeaderComponentType> {
     componentDidMount() {
-        usersAPI.getMyPage().then(data => {
-            if (data.resultCode === 0) {
-                const {id, login, email} = data.data
-                this.props.setAuthUserData({id, login, email})
-            }
-        })
+        this.props.redirectToUsersPage()
     }
 
     render() {
@@ -29,6 +22,8 @@ class HeaderComponent extends React.Component<HeaderComponentType> {
 }
 
 const mapStateToProps = (state: StoreType) => ({data: state.auth})
-const mapDispatchToProps = {setAuthUserData}
+const mapDispatchToProps = {
+    redirectToUsersPage
+}
 
 export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderComponent as any)

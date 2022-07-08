@@ -1,4 +1,6 @@
 import {ActionsType} from "./redux-store";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 
 export type AuthReducerDataType = {
@@ -28,3 +30,13 @@ export const setAuthUserData = ({id, login, email}: AuthReducerDataType) => ({
     type: 'SET-USERS-DATA',
     data: {id, login, email}
 } as const)
+
+
+export const redirectToUsersPage = () => (dispatch: Dispatch) => {
+    usersAPI.getMyPage().then(data => {
+        if (data.resultCode === 0) {
+            const {id, login, email} = data.data
+            dispatch(setAuthUserData({id, login, email}))
+        }
+    })
+}

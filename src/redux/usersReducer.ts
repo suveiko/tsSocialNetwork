@@ -108,7 +108,7 @@ export const unFollowFromUser = (id: string) => (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgress(false, id))
     })
 }
-export const FollowOnUser = (id: string) => (dispatch: Dispatch) => {
+export const followOnUser = (id: string) => (dispatch: Dispatch) => {
     dispatch(toggleFollowingProgress(true, id))
     usersAPI.followOnUser(id).then(data => {
         data.resultCode === 0 && dispatch(follow(id))
