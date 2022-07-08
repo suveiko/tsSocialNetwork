@@ -1,5 +1,6 @@
 import {ActionsType} from "./redux-store";
 import {Dispatch} from "redux";
+
 import {usersAPI} from "../api/api";
 
 
@@ -84,7 +85,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: string) => 
 } as const)
 
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
     usersAPI.getUsers(currentPage, pageSize).then(data => {
         dispatch(toggleIsFetching(false))
@@ -92,11 +93,25 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => (
         dispatch(setTotalUsersCount(data.totalCount))
     })
 }
-export const onChangeUsersThunkCreator = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const onChangeUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(setCurrentPage(currentPage))
     dispatch(toggleIsFetching(true))
     usersAPI.getUsers(currentPage, pageSize).then(data => {
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
+    })
+}
+export const unFollowFromUser = (id: string) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowingProgress(true, id))
+    usersAPI.unFollowFromUser(id).then(data => {
+        data.resultCode === 0 && dispatch(unFollow(id))
+        dispatch(toggleFollowingProgress(false, id))
+    })
+}
+export const FollowOnUser = (id: string) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowingProgress(true, id))
+    usersAPI.followOnUser(id).then(data => {
+        data.resultCode === 0 && dispatch(follow(id))
+        dispatch(toggleFollowingProgress(false, id))
     })
 }

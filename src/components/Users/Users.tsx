@@ -5,8 +5,6 @@ import {UsersType} from "./UsersContainer";
 import avatar from '../../assets/user-icon.png'
 import s from './Users.module.css'
 
-import {usersAPI} from "../../api/api";
-
 
 type UsersPropsType = {
     onPageChanged: (page: number) => void
@@ -16,9 +14,9 @@ type UsersPropsType = {
 const Users = ({
                    totalUsersCount, pageSize,
                    onPageChanged, currentPage,
-                   users, unFollow, follow,
-                   toggleFollowingProgress,
-                   followingInProgress
+                   users, FollowOnUser,
+                   followingInProgress,
+                   unFollowFromUser
                }: UsersPropsType) => {
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -27,21 +25,8 @@ const Users = ({
         pages.push(i)
     }
 
-    const onClickUnFollowFromUser = (id: string) => {
-        toggleFollowingProgress(true, id)
-        usersAPI.unFollowFromUser(id).then(data => {
-            data.resultCode === 0 && unFollow(id)
-            toggleFollowingProgress(false, id)
-        })
-    }
-    const onClickFollowOnUser = (id: string) => {
-        toggleFollowingProgress(true, id)
-        usersAPI.followOnUser(id).then(data => {
-            data.resultCode === 0 && follow(id)
-            toggleFollowingProgress(false, id)
-        })
-    }
-
+    const onClickUnFollowFromUser = (id: string) => unFollowFromUser(id)
+    const onClickFollowOnUser = (id: string) => FollowOnUser(id)
 
     return (
         <div>
