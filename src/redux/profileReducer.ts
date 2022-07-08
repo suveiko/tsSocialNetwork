@@ -1,6 +1,8 @@
 import {v1} from "uuid";
 
 import {ActionsType} from "./redux-store";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 
 export type PostsArrayType = {
@@ -92,4 +94,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 export const addPost = () => ({type: "ADD-POST"} as const)
 export const updateNewPostText = (newMessage: string) => ({type: "UPDATE-NEW-POST-TEXT", newMessage} as const)
 export const setUserProfile = (profile: ProfileUserType) => ({type: "SET-USER-PROFILE", profile} as const)
+
+
+export const getProfileOfUser = (userId: string) => (dispatch: Dispatch) => {
+    usersAPI.getProfileOfUser(userId)
+        .then(data => dispatch(setUserProfile(data)))
+}
 
