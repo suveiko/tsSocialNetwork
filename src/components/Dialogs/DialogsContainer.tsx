@@ -13,7 +13,8 @@ const mapStateToProps = (state: StoreType) => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageTextValue: state.dialogsPage.newMessageTextValue
+        newMessageTextValue: state.dialogsPage.newMessageTextValue,
+        isAuth: state.auth.isAuth
     } as const
 }
 const mapDispatchToProps = {addMessage, updateNewMessageText}

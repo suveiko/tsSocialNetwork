@@ -6,11 +6,12 @@ import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
 
 import s from "./Dialogs.module.css"
+import {Redirect} from "react-router-dom";
 
 
 export const Dialogs = ({
                             updateNewMessageText, dialogs, messages,
-                            newMessageTextValue, addMessage
+                            newMessageTextValue, addMessage, isAuth
                         }: DialogsContainerType) => {
 
     const dialogsElement = dialogs.map(({id, name}) =>
@@ -34,6 +35,8 @@ export const Dialogs = ({
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         e.key === 'Enter' && newMessageTextValue.trim() !== '' && addNewMessage()
     }
+
+    if (!isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>

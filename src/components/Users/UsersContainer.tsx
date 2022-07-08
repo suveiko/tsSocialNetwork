@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
 import {StoreType} from "../../redux/redux-store";
 import {
@@ -10,6 +11,7 @@ import {
 import Users from "./Users";
 
 import Preloader from "../common/Preloader/Preloader";
+
 
 
 export type UsersType = ReturnType<typeof mapStateToProps>
@@ -27,6 +29,7 @@ class UsersComponent extends React.Component<UsersType> {
     }
 
     render() {
+        if (!this.props.isAuth) return <Redirect to={'/login'}/>
         return <>
             {
                 this.props.isFetching
@@ -47,7 +50,8 @@ const mapStateToProps = (state: StoreType) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth
     }
 }
 

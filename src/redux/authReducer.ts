@@ -1,6 +1,7 @@
 import {ActionsType} from "./redux-store";
-import {AuthAPI} from "../api/api";
 import {Dispatch} from "redux";
+
+import {AuthAPI} from "../api/api";
 
 
 export type AuthReducerDataType = {
@@ -32,7 +33,7 @@ export const setAuthUserData = ({id, login, email}: AuthReducerDataType) => ({
 } as const)
 
 
-export const getMyPage = () => (dispatch: Dispatch) => {
+export const getAuthUserData = () => (dispatch: Dispatch) => {
     AuthAPI.getMyPage().then(data => {
         if (data.resultCode === 0) {
             const {id, login, email} = data.data

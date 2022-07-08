@@ -1,8 +1,9 @@
 import {v1} from "uuid";
 
 import {ActionsType} from "./redux-store";
-import {ProfileAPI} from "../api/api";
 import {Dispatch} from "redux";
+
+import {ProfileAPI} from "../api/api";
 
 
 export type PostsArrayType = {

@@ -6,7 +6,7 @@ import {MapStateToPropsType} from "./ProfileContainer";
 export const Profile = ({profile}: MapStateToPropsType) => {
     return (
         <div>
-            <ProfileInfo profile={profile}/>
+            <ProfileInfo profile={profile} />
             <MyPostsContainer/>
         </div>
     )

@@ -1,4 +1,4 @@
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 import {UsersType} from "./UsersContainer";
 
@@ -16,7 +16,7 @@ const Users = ({
                    onPageChanged, currentPage,
                    users, followOnUser,
                    followingInProgress,
-                   unFollowFromUser
+                   unFollowFromUser, isAuth
                }: UsersPropsType) => {
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)

@@ -1,14 +1,14 @@
 import {MapStateToPropsType} from "../ProfileContainer";
 
 import Preloader from "../../common/Preloader/Preloader";
+
 import s from "./ProfileInfo.module.css";
 import avatar from "../../../assets/user-icon.png"
 
 
 export const ProfileInfo = ({profile}: MapStateToPropsType) => {
-    if (!profile) {
-        return <Preloader/>
-    }
+
+    if (!profile) return <Preloader/>
 
     return (
         <div>

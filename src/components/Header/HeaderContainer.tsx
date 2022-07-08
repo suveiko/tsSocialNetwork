@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Header} from "./Header";
 
 import {StoreType} from "../../redux/redux-store";
-import {getMyPage} from "../../redux/authReducer";
+import {getAuthUserData} from "../../redux/authReducer";
 
 
 export type HeaderComponentType = ReturnType<typeof mapStateToProps>
@@ -13,7 +13,7 @@ export type HeaderComponentType = ReturnType<typeof mapStateToProps>
 
 class HeaderComponent extends React.Component<HeaderComponentType> {
     componentDidMount() {
-        this.props.getMyPage()
+        this.props.getAuthUserData()
     }
 
     render() {
@@ -23,7 +23,7 @@ class HeaderComponent extends React.Component<HeaderComponentType> {
 
 const mapStateToProps = (state: StoreType) => ({data: state.auth})
 const mapDispatchToProps = {
-    getMyPage
+    getAuthUserData
 }
 
 export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderComponent as any)
