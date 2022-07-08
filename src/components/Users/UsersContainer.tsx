@@ -3,7 +3,8 @@ import {connect} from "react-redux";
 
 import {StoreType} from "../../redux/redux-store";
 import {
-    follow, setCurrentPage,
+    follow, getUsersThunkCreator, onChangeUsersThunkCreator,
+    setCurrentPage,
     setTotalUsersCount, setUsers,
     toggleFollowingProgress,
     toggleIsFetching, unFollow,
@@ -11,32 +12,21 @@ import {
 
 import Users from "./Users";
 
-import {usersAPI} from "../../api/api";
-
 import Preloader from "../common/Preloader/Preloader";
 
 
-export type UsersType = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
+export type UsersType = ReturnType<typeof mapStateToProps>
+    & typeof mapDispatchToProps
 
 
 class UsersComponent extends React.Component<UsersType> {
 
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items)
-            this.props.setTotalUsersCount(data.totalCount)
-        })
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (page: number) => {
-        this.props.setCurrentPage(page)
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(page, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items)
-        })
+        this.props.onChangeUsersThunkCreator(page, this.props.pageSize)
     }
 
     render() {
@@ -61,13 +51,15 @@ const mapStateToProps = (state: StoreType) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress
-    } as const
+    }
 }
 
 const mapDispatchToProps = {
-    follow, unFollow, setUsers,
-    setCurrentPage, setTotalUsersCount, toggleIsFetching,
-    toggleFollowingProgress
+    follow, unFollow,
+    setUsers, setCurrentPage,
+    setTotalUsersCount, toggleIsFetching,
+    toggleFollowingProgress, getUsersThunkCreator,
+    onChangeUsersThunkCreator
 }
 
 

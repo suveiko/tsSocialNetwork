@@ -10,7 +10,8 @@ import {setUserProfile} from "../../redux/profileReducer";
 import {usersAPI} from "../../api/api";
 
 
-export type ProfileType = ReturnType<typeof mapStateToProps>
+export type MapStateToPropsType = ReturnType<typeof mapStateToProps>
+export type ProfileType = MapStateToPropsType
     & typeof mapDispatchToProps
     & RouteComponentProps<{ userId: string }>
 
@@ -26,11 +27,11 @@ class ProfileComponent extends React.Component<ProfileType> {
     }
 
     render() {
-        return <Profile {...this.props} profile={this.props.profile}/>
+        return <Profile {...this.props}/>
     }
 }
 
-const mapStateToProps = (state: StoreType) => ({profile: state.profilePage.profile} as const)
+const mapStateToProps = (state: StoreType) => ({profile: state.profilePage.profile})
 const mapDispatchToProps = {setUserProfile}
 
 const withUrlDataContainerComponent = withRouter(ProfileComponent as any)
