@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 
 import {ActionsType} from "./redux-store";
-import {usersAPI} from "../api/api";
+import {ProfileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 
@@ -97,7 +97,7 @@ export const setUserProfile = (profile: ProfileUserType) => ({type: "SET-USER-PR
 
 
 export const getProfileOfUser = (userId: string) => (dispatch: Dispatch) => {
-    usersAPI.getProfileOfUser(userId)
+    ProfileAPI.getProfileOfUser(userId)
         .then(data => dispatch(setUserProfile(data)))
 }
 
