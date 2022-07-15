@@ -11,7 +11,7 @@ import s from "./Dialogs.module.css"
 
 export const Dialogs = ({
                             updateNewMessageText, dialogs, messages,
-                            newMessageTextValue, addMessage, isAuth
+                            newMessageTextValue, addMessage
                         }: DialogsContainerType) => {
 
     const dialogsElement = dialogs.map(({id, name}) =>
