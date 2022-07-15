@@ -1,5 +1,4 @@
 import {ChangeEvent, KeyboardEvent} from "react";
-import {Redirect} from "react-router-dom";
 
 import {DialogsContainerType} from "./DialogsContainer";
 
@@ -36,8 +35,6 @@ export const Dialogs = ({
     const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         e.key === 'Enter' && newMessageTextValue.trim() !== '' && addNewMessage()
     }
-
-    if (!isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>

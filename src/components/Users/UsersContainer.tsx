@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
 
 import {StoreType} from "../../redux/redux-store";
 import {
@@ -11,7 +10,7 @@ import {
 import Users from "./Users";
 
 import Preloader from "../common/Preloader/Preloader";
-
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 
 export type UsersType = ReturnType<typeof mapStateToProps>
@@ -23,13 +22,9 @@ class UsersComponent extends React.Component<UsersType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
-
-    onPageChanged = (page: number) => {
-        this.props.onChangeUsers(page, this.props.pageSize)
-    }
+    onPageChanged = (page: number) => this.props.onChangeUsers(page, this.props.pageSize)
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={'/login'}/>
         return <>
             {
                 this.props.isFetching
@@ -54,11 +49,10 @@ const mapStateToProps = (state: StoreType) => {
         isAuth: state.auth.isAuth
     }
 }
-
 const mapDispatchToProps = {
     getUsers, onChangeUsers,
     unFollowFromUser, followOnUser
 }
 
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersComponent as any)
+export const UsersContainer = WithAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersComponent as any))

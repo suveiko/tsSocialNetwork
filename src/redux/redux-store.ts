@@ -13,8 +13,8 @@ import {
 import {authReducer, setAuthUserData} from "./authReducer";
 
 
-export type ReducersType = typeof reducers
-export type StoreType = ReturnType<ReducersType>
+export type ReducerType = typeof rootReducer
+export type StoreType = ReturnType<ReducerType>
 
 export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof updateNewPostText>
@@ -31,11 +31,11 @@ export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof toggleFollowingProgress>
 
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
     auth: authReducer
 })
 
-export const store = createStore(reducers, applyMiddleware(thunk))
+export const store = createStore(rootReducer, applyMiddleware(thunk))
