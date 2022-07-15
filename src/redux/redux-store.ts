@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk"
 
-import {addPost, profileReducer, setUserProfile, updateNewPostText,} from "./profileReducer";
+import {addPost, profileReducer, setStatus, setUserProfile, updateNewPostText,} from "./profileReducer";
 import {addMessage, dialogsReducer, updateNewMessageText} from "./dialogsReducer";
 import {
     follow, setCurrentPage,
@@ -29,6 +29,7 @@ export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof setStatus>
 
 
 const rootReducer = combineReducers({

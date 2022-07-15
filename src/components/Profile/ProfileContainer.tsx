@@ -6,11 +6,12 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {Profile} from "./Profile";
 
 import {StoreType} from "../../redux/redux-store";
-import {getProfileOfUser, ProfileUserType, setUserProfile} from "../../redux/profileReducer";
+import {getProfileOfUser, getStatus, ProfileUserType, setUserProfile, updateStatus} from "../../redux/profileReducer";
 
 
 export type MapStateToPropsType = {
     profile: ProfileUserType
+    status: string
 }
 export type ProfileType = MapStateToPropsType
     & typeof mapDispatchToProps
@@ -24,6 +25,7 @@ class ProfileContainer extends Component<ProfileType> {
             userId = '2'
         }
         this.props.getProfileOfUser(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
@@ -34,11 +36,14 @@ class ProfileContainer extends Component<ProfileType> {
 const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
+        status: state.profilePage.status
     }
 }
 const mapDispatchToProps = {
     setUserProfile,
-    getProfileOfUser
+    getProfileOfUser,
+    getStatus,
+    updateStatus
 }
 
 

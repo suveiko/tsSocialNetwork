@@ -1,4 +1,4 @@
-import {MapStateToPropsType} from "../ProfileContainer";
+import {ProfileType} from "../ProfileContainer";
 import ProfileStatus from "./ProfileStatus"
 
 import Preloader from "../../common/Preloader/Preloader";
@@ -7,7 +7,7 @@ import s from "./ProfileInfo.module.css";
 import avatar from "../../../assets/user-icon.png"
 
 
-export const ProfileInfo = ({profile}: MapStateToPropsType) => {
+export const ProfileInfo = ({profile, status, updateStatus}: ProfileType) => {
 
     if (!profile) return <Preloader/>
 
@@ -19,7 +19,7 @@ export const ProfileInfo = ({profile}: MapStateToPropsType) => {
                     src={!profile.photos.small ? avatar : profile.photos.small}
                     alt="avatar"
                 />
-                <ProfileStatus status={'Hello World'}/>
+                <ProfileStatus status={status} updateStatus={updateStatus}/>
                 <div>{profile.fullName}</div>
                 <div>{profile.aboutMe}</div>
                 <div>My Github - {profile.contacts.github}</div>

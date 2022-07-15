@@ -1,15 +1,18 @@
-import {Component} from "react";
+import {ChangeEvent, Component} from "react";
+import {Dispatch} from "redux";
 
 
 type ProfileStatusType = {
     status: string
+    updateStatus: (status: string) => (dispatch: Dispatch) => void
 }
 
 
 class ProfileStatus extends Component<ProfileStatusType> {
 
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     activateEditMode = () => {
@@ -21,6 +24,12 @@ class ProfileStatus extends Component<ProfileStatusType> {
         this.setState({
             editMode: false
         })
+        this.props.updateStatus(this.state.status)
+    }
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
     }
 
     render() {
@@ -29,12 +38,17 @@ class ProfileStatus extends Component<ProfileStatusType> {
                 {
                     !this.state.editMode
                         ? <div>
-                            <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                            <span
+                                onDoubleClick={this.activateEditMode}
+                            >
+                                {this.props.status || 'No status'}
+                            </span>
                         </div>
                         : <div>
                             <input
-                                value={this.props.status}
+                                value={this.state.status}
                                 onBlur={this.deactivateEditMode}
+                                onChange={this.onStatusChange}
                                 autoFocus
                             />
                         </div>
