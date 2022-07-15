@@ -1,4 +1,5 @@
 import {MapStateToPropsType} from "../ProfileContainer";
+import ProfileStatus from "./ProfileStatus"
 
 import Preloader from "../../common/Preloader/Preloader";
 
@@ -12,19 +13,13 @@ export const ProfileInfo = ({profile}: MapStateToPropsType) => {
 
     return (
         <div>
-            <div>
-                <img
-                    className={s.img}
-                    src='https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg'
-                    alt="#"
-                />
-            </div>
             <div className={s.descriptionBlock}>
                 <img
                     className={s.userPhoto}
                     src={!profile.photos.small ? avatar : profile.photos.small}
                     alt="avatar"
                 />
+                <ProfileStatus status={'Hello World'}/>
                 <div>{profile.fullName}</div>
                 <div>{profile.aboutMe}</div>
                 <div>My Github - {profile.contacts.github}</div>

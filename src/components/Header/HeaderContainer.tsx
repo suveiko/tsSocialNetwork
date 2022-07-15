@@ -1,17 +1,18 @@
-import React from "react";
+import {Component, FC} from "react";
 import {connect} from "react-redux";
 
 import {Header} from "./Header";
 
 import {StoreType} from "../../redux/redux-store";
 import {getAuthUserData} from "../../redux/authReducer";
+import {compose} from "redux";
 
 
 export type HeaderComponentType = ReturnType<typeof mapStateToProps>
     & typeof mapDispatchToProps
 
 
-class HeaderComponent extends React.Component<HeaderComponentType> {
+class HeaderContainer extends Component<HeaderComponentType> {
     componentDidMount() {
         this.props.getAuthUserData()
     }
@@ -26,4 +27,7 @@ const mapDispatchToProps = {
     getAuthUserData
 }
 
-export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderComponent as any)
+
+export default compose<FC>(
+    connect(mapStateToProps, mapDispatchToProps)
+)(HeaderContainer)

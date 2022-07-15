@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {StoreType} from "../../redux/redux-store";
 import {addMessage, updateNewMessageText} from '../../redux/dialogsReducer'
+
 import {Dialogs} from "./Dialogs";
 
 

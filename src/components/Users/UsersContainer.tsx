@@ -55,6 +55,7 @@ const mapDispatchToProps = {
     unFollowFromUser, followOnUser
 }
 
+
 export default compose<FC>(
     connect(mapStateToProps, mapDispatchToProps),
     WithAuthRedirect

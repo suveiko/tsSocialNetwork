@@ -7,7 +7,6 @@ import {Profile} from "./Profile";
 
 import {StoreType} from "../../redux/redux-store";
 import {getProfileOfUser, ProfileUserType, setUserProfile} from "../../redux/profileReducer";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 
 export type MapStateToPropsType = {
@@ -42,9 +41,9 @@ const mapDispatchToProps = {
     getProfileOfUser
 }
 
+
 export default compose<FC>(
     connect(mapStateToProps, mapDispatchToProps),
     withRouter,
-    WithAuthRedirect
 )(ProfileContainer)
 

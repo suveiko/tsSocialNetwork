@@ -1,13 +1,11 @@
-import React from "react";
-
 import {Route} from "react-router-dom";
 
-import {Navbar} from "./components/Navbar/Navbar";
 import UsersContainer from "./components/Users/UsersContainer";
 import Dialogs from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import {HeaderContainer} from "./components/Header/HeaderContainer";
-import {Login} from "./components/Login/Login";
+import HeaderContainer from "./components/Header/HeaderContainer";
+import Navbar from "./components/Navbar/Navbar";
+import Login from "./components/Login/Login";
 
 
 import './App.css';

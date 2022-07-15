@@ -17,4 +17,5 @@ const mapStateToProps = (state: StoreType) => {
 }
 const mapDispatchToProps = {addPost, updateNewPostText}
 
+
 export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

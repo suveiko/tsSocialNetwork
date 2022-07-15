@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import s from './Navbar.module.css'
 
 
-export const Navbar = () => {
+const Navbar = () => {
 
     const stateForNavLink = [
         {link: '/profile', name: 'Profile'},
@@ -27,3 +27,5 @@ export const Navbar = () => {
         </nav>
     )
 }
+
+export default Navbar
