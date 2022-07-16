@@ -1,4 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
+import {reducer as formReducer} from "redux-form"
 import thunk from "redux-thunk"
 
 import {addPost, profileReducer, setStatus, setUserProfile, updateNewPostText,} from "./profileReducer";
@@ -15,7 +16,6 @@ import {authReducer, setAuthUserData} from "./authReducer";
 
 export type ReducerType = typeof rootReducer
 export type StoreType = ReturnType<ReducerType>
-
 export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof addMessage>
@@ -36,7 +36,12 @@ const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
+
+
+// @ts-ignore for dev
+window.store = store
