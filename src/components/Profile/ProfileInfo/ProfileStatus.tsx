@@ -32,7 +32,7 @@ class ProfileStatus extends Component<ProfileStatusType> {
         })
     }
 
-    componentDidUpdate(prevProps: ProfileStatusType, prevState: { editMode: boolean, status: string }) {
+    componentDidUpdate(prevProps: ProfileStatusType, prevState: { editMode: boolean, status: '' }) {
         if (prevProps.status !== this.props.status) {
             this.setState({status: this.props.status})
         }
