@@ -25,8 +25,8 @@ const Users = ({
         pages.push(i)
     }
 
-    const onClickUnFollowFromUser = (id: string) => unFollowFromUser(id)
-    const onClickFollowOnUser = (id: string) => followOnUser(id)
+    const onClickUnFollowFromUser = (id: number) => unFollowFromUser(id)
+    const onClickFollowOnUser = (id: number) => followOnUser(id)
 
     return (
         <div>

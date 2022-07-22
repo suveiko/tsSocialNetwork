@@ -12,30 +12,89 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers: (currentPage: number, pageSize: number) => instance
-        .get(`users?page=${currentPage}&count=${pageSize}`)
+        .get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}`)
         .then(res => res.data),
-    unFollowFromUser: (id: string) => instance
-        .delete(`follow/${id}`)
+    unFollowFromUser: (id: number) => instance
+        .delete<ResponseType>(`follow/${id}`)
         .then(res => res.data),
-    followOnUser: (id: string) => instance
-        .post(`follow/${id}`, {})
+    followOnUser: (id: number) => instance
+        .post<ResponseType>(`follow/${id}`, {})
         .then(res => res.data),
 }
 
 export const ProfileAPI = {
     getProfileOfUser: (userId: string) => instance
-        .get(`profile/${userId}`)
+        .get<GetProfileType>(`profile/${userId}`)
         .then(res => res.data),
     getStatus: (userId: string) => instance
-        .get(`profile/status/${userId}`)
+        .get<GetStatusType>(`profile/status/${userId}`)
         .then(res => res.data),
     updateStatus: (status: string) => instance
-        .put(`profile/status`, {status})
+        .put<UpdateStatusType>(`profile/status`, {status})
         .then(res => res.data)
 }
 
 export const AuthAPI = {
     getMyPage: () => instance
-        .get(`auth/me`)
+        .get<ResponseType<GetAuthMeType>>(`auth/me`)
         .then(res => res.data),
+}
+
+
+export type UserType = {
+    id: number
+    name: string
+    status: string
+    photos: {
+        small: string
+        large: string
+    }
+    followed: boolean
+    uniqueUrlName?: string
+}
+export type PostType = {
+    id: string
+    message: string
+    likes: number
+}
+export type ResponseType<D = {}> = {
+    resultCode: number
+    messages: string[]
+    data: D
+}
+export type GetUsersType = {
+    items: UserType[]
+    totalCount: number
+    followed: boolean
+}
+export type GetProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: {
+        small: string
+        large: string
+    }
+}
+export type GetAuthMeType = {
+    id: number
+    email: string
+    login: string
+}
+export type GetStatusType = string
+export type UpdateStatusType = {
+    resultCode: number
+    messages: string[],
+    data: object
 }

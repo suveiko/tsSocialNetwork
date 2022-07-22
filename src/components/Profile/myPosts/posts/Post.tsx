@@ -3,10 +3,10 @@ import s from './Post.module.css';
 
 type PostType = {
     message: string
-    likeCounts: number
+    likes: number
 }
 
-export const Post = ({message, likeCounts}: PostType) => {
+export const Post = ({message, likes}: PostType) => {
     return (
         <div>
             <img
@@ -16,7 +16,7 @@ export const Post = ({message, likeCounts}: PostType) => {
             />
             {message.trim()}
             <div>
-                <span>likes: {likeCounts}</span>
+                <span>likes: {likes}</span>
             </div>
 
         </div>

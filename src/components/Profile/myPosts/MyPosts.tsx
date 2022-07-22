@@ -8,11 +8,11 @@ import s from "./MyPosts.module.css"
 
 export const MyPosts = ({posts, newPostText, updateNewPostText, addPost}: MyPostsType) => {
 
-    const postsElements = posts.map((({id, message, likeCounts}) =>
+    const postsElements = posts.map((({id, message, likes}) =>
             <Post
                 key={id}
                 message={message}
-                likeCounts={likeCounts}
+                likes={likes}
             />
     ))
 

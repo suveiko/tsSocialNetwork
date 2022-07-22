@@ -21,7 +21,7 @@ export const ProfileInfo = ({profile, status, updateStatus}: ProfileType) => {
                 />
                 <ProfileStatus status={status} updateStatus={updateStatus}/>
                 <div>{profile.fullName}</div>
-                <div>{profile.aboutMe}</div>
+                <div>{profile.lookingForAJobDescription}</div>
                 <div>My Github - {profile.contacts.github}</div>
             </div>
         </div>

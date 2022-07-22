@@ -3,54 +3,27 @@ import {v1} from "uuid";
 import {ActionsType} from "./redux-store";
 import {Dispatch} from "redux";
 
-import {ProfileAPI} from "../api/api";
+import {GetProfileType, PostType, ProfileAPI} from "../api/api";
 
 
-export type PostsArrayType = {
-    id: string
-    likeCounts: number
-    message: string
-}
-export type ProfileUserType = {
-    aboutMe: string
-    contacts: {
-        facebook: string
-        website: string
-        vk: string
-        twitter: string
-        instagram: string
-        youtube: string
-        github: string
-        mainLink: string
-    },
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    userId: number
-    photos: {
-        small: string
-        large: string
-    }
-}
 export type ProfilePageType = {
-    posts: PostsArrayType[]
+    posts: PostType[]
     newPostText: string
-    profile: ProfileUserType
+    profile: GetProfileType
     status: string
 }
 
 const initialState: ProfilePageType = {
     posts: [
-        {id: v1(), likeCounts: 10, message: 'Hello, Im Sasha'},
-        {id: v1(), likeCounts: 2, message: 'Go away'},
-        {id: v1(), likeCounts: 44, message: 'I like you'},
-        {id: v1(), likeCounts: 2, message: 'What happening?'},
-        {id: v1(), likeCounts: 130, message: 'No'},
-        {id: v1(), likeCounts: 10232, message: 'YE'}
+        {id: v1(), likes: 10, message: 'Hello, Im Sasha'},
+        {id: v1(), likes: 2, message: 'Go away'},
+        {id: v1(), likes: 44, message: 'I like you'},
+        {id: v1(), likes: 2, message: 'What happening?'},
+        {id: v1(), likes: 130, message: 'No'},
+        {id: v1(), likes: 10232, message: 'YE'}
     ],
     newPostText: '',
     profile: {
-        aboutMe: '',
         contacts: {
             facebook: '',
             website: '',
@@ -79,7 +52,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             return {
                 ...state,
                 posts: [
-                    {id: v1(), likeCounts: new Date().getSeconds(), message: state.newPostText},
+                    {id: v1(), likes: new Date().getSeconds(), message: state.newPostText},
                     ...state.posts,
                 ],
                 newPostText: ''
@@ -98,7 +71,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 
 export const addPost = () => ({type: "ADD-POST"} as const)
 export const updateNewPostText = (newMessage: string) => ({type: "UPDATE-NEW-POST-TEXT", newMessage} as const)
-export const setUserProfile = (profile: ProfileUserType) => ({type: "SET-USER-PROFILE", profile} as const)
+export const setUserProfile = (profile: GetProfileType) => ({type: "SET-USER-PROFILE", profile} as const)
 export const setStatus = (status: string) => ({type: "SET-STATUS", status} as const)
 
 
