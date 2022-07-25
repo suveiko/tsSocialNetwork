@@ -8,7 +8,6 @@ import {GetProfileType, PostType, ProfileAPI} from "../api/api";
 
 export type ProfilePageType = {
     posts: PostType[]
-    newPostText: string
     profile: GetProfileType
     status: string
 }
@@ -22,7 +21,6 @@ const initialState: ProfilePageType = {
         {id: v1(), likes: 130, message: 'No'},
         {id: v1(), likes: 10232, message: 'YE'}
     ],
-    newPostText: '',
     profile: {
         contacts: {
             facebook: '',
@@ -52,13 +50,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             return {
                 ...state,
                 posts: [
-                    {id: v1(), likes: new Date().getSeconds(), message: state.newPostText},
+                    {id: v1(), likes: new Date().getSeconds(), message: action.message},
                     ...state.posts,
                 ],
-                newPostText: ''
             }
-        case "UPDATE-NEW-POST-TEXT":
-            return {...state, newPostText: action.newMessage}
         case "SET-USER-PROFILE":
             return {...state, profile: action.profile}
         case "SET-STATUS":
@@ -69,8 +64,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 }
 
 
-export const addPost = () => ({type: "ADD-POST"} as const)
-export const updateNewPostText = (newMessage: string) => ({type: "UPDATE-NEW-POST-TEXT", newMessage} as const)
+export const addPost = (message: string) => ({type: "ADD-POST", message} as const)
 export const setUserProfile = (profile: GetProfileType) => ({type: "SET-USER-PROFILE", profile} as const)
 export const setStatus = (status: string) => ({type: "SET-STATUS", status} as const)
 

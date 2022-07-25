@@ -1,5 +1,5 @@
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {MyPostsContainer} from "./myPosts/MyPostsContainer";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "./ProfileContainer";
 
 import s from "./Profile.module.css"

@@ -30,4 +30,4 @@ const DialogForm: FC<InjectedFormProps<DialogFormType>> = ({handleSubmit}) => {
 };
 
 
-export const LoginReduxForm = reduxForm<DialogFormType>({form: 'login'})(DialogForm)
+export const LoginReduxForm = reduxForm<DialogFormType>({form: 'dialog'})(DialogForm)

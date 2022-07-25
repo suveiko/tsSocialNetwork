@@ -2,7 +2,7 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {reducer as formReducer} from "redux-form"
 import thunk from "redux-thunk"
 
-import {addPost, profileReducer, setStatus, setUserProfile, updateNewPostText,} from "./profileReducer";
+import {addPost, profileReducer, setStatus, setUserProfile,} from "./profileReducer";
 import {addMessage, dialogsReducer} from "./dialogsReducer";
 import {
     follow, setCurrentPage,
@@ -17,7 +17,6 @@ import {authReducer, setAuthUserData} from "./authReducer";
 export type ReducerType = typeof rootReducer
 export type StoreType = ReturnType<ReducerType>
 export type ActionsType = ReturnType<typeof addPost>
-    | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof addMessage>
     | ReturnType<typeof follow>
     | ReturnType<typeof unFollow>
