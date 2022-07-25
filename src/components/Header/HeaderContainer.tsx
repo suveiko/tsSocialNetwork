@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 
 import {Header} from "./Header";
 
-import {StoreType} from "../../redux/redux-store";
-import {getAuthUserData} from "../../redux/authReducer";
+import {StoreType} from "../../store/redux-store";
+import {getAuthUserData} from "../../store/authReducer";
 import {compose} from "redux";
 
 

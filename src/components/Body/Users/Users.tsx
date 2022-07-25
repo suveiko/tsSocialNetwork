@@ -2,7 +2,7 @@ import {NavLink} from "react-router-dom";
 
 import {UsersType} from "./UsersContainer";
 
-import avatar from '../../assets/user-icon.png'
+import avatar from '../../../assets/user-icon.png'
 import s from './Users.module.css'
 
 
@@ -21,7 +21,7 @@ const Users = ({
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
     const pages = []
-    for (let i = 1; i <= pagesCount; i++) {
+    for (let i = 1; i <= 20; i++) {
         pages.push(i)
     }
 
@@ -29,7 +29,7 @@ const Users = ({
     const onClickFollowOnUser = (id: number) => followOnUser(id)
 
     return (
-        <div>
+        <div className={s.container}>
             <div>
                 {
                     pages.map(p => (
@@ -44,7 +44,7 @@ const Users = ({
             </div>
             {
                 users.map(u => <div key={u.id}>
-            <span>
+            <div>
                 <div>
                     <NavLink to={'/profile/' + u.id}>
                         <img
@@ -73,18 +73,11 @@ const Users = ({
                             </button>
                     }
                 </div>
-            </span>
-                        <span>
-                <span>
-                    <div>{u.name}</div>
-                    <div>{u.status}</div>
-                </span>
-                        <span>
-                            <div>{"u.location.country"}</div>
-                            <div>{"u.location.cityName"}</div>
-                        </span>
-
-            </span>
+            </div>
+                        <div>
+                            <div>{u.name}</div>
+                            <div>{u.status}</div>
+                        </div>
                     </div>
                 )}
         </div>

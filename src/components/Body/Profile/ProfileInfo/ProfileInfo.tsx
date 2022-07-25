@@ -1,10 +1,10 @@
 import {ProfileType} from "../ProfileContainer";
 import ProfileStatus from "./ProfileStatus"
 
-import Preloader from "../../common/Preloader/Preloader";
+import Preloader from "../../../common/Preloader/Preloader";
 
 import s from "./ProfileInfo.module.css";
-import avatar from "../../../assets/user-icon.png"
+import avatar from "../../../../assets/user-icon.png"
 
 
 export const ProfileInfo = ({profile, status, updateStatus}: ProfileType) => {

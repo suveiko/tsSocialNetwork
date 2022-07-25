@@ -1,15 +1,15 @@
 import {Component, FC} from "react";
 import {connect} from "react-redux";
 
-import {StoreType} from "../../redux/redux-store";
+import {StoreType} from "../../../store/redux-store";
 import {
     getUsers, onChangeUsers,
     unFollowFromUser, followOnUser
-} from "../../redux/usersReducer";
+} from "../../../store/usersReducer";
 
 import Users from "./Users";
 
-import Preloader from "../common/Preloader/Preloader";
+import Preloader from "../../common/Preloader/Preloader";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 

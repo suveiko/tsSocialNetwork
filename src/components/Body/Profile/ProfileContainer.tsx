@@ -5,10 +5,10 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 
 import {Profile} from "./Profile";
 
-import {StoreType} from "../../redux/redux-store";
-import {getProfileOfUser, getStatus, setUserProfile, updateStatus} from "../../redux/profileReducer";
+import {StoreType} from "../../../store/redux-store";
+import {getProfileOfUser, getStatus, setUserProfile, updateStatus} from "../../../store/profileReducer";
 
-import {GetProfileType} from "../../api/api";
+import {GetProfileType} from "../../../api/api";
 
 
 export type MapStateToPropsType = {
