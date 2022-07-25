@@ -18,7 +18,6 @@ const FormControl = ({input, meta, ...rest}: WrappedFieldProps & Props) => {
         </div>
     )
 }
-
 export const TextArea = (props: WrappedFieldProps) => <FormControl {...props}>
     <textarea {...props.input} {...props} />
 </FormControl>

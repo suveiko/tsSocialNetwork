@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Header} from "./Header";
 
 import {StoreType} from "../../store/redux-store";
-import {getAuthUserData} from "../../store/authReducer";
+import {getAuthUserData, logout} from "../../store/authReducer";
 import {compose} from "redux";
 
 
@@ -23,7 +23,7 @@ class HeaderContainer extends Component<HeaderComponentType> {
 }
 
 const mapStateToProps = (state: StoreType) => ({data: state.auth})
-const mapDispatchToProps = {getAuthUserData}
+const mapDispatchToProps = {getAuthUserData, logout}
 
 
 export default compose<FC>(

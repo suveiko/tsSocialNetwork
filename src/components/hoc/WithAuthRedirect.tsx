@@ -6,7 +6,7 @@ import {StoreType} from "../../store/redux-store";
 
 
 type MapStateToPropsType = {
-    isAuth?: boolean
+    isAuth: boolean
 }
 const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     return {

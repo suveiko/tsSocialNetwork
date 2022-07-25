@@ -30,6 +30,7 @@ const LoginForm: FC<InjectedFormProps<LoginFormType>> = ({handleSubmit}) => {
                     component={Input}
                     name='password'
                     validate={[required]}
+                    type='password'
                 />
             </div>
             <div>

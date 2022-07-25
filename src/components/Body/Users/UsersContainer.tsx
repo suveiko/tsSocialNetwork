@@ -14,8 +14,6 @@ import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import Preloader from "../../common/Preloader/Preloader";
 
 
-
-
 export type UsersType = ReturnType<typeof mapStateToProps>
     & typeof mapDispatchToProps
 

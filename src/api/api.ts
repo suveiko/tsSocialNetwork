@@ -35,9 +35,15 @@ export const ProfileAPI = {
 }
 
 export const AuthAPI = {
-    getMyPage: () => instance
+    me: () => instance
         .get<ResponseType<GetAuthMeType>>(`auth/me`)
         .then(res => res.data),
+    login: (email: string, password: string, rememberMe: boolean = false) => instance
+        .post(`auth/login`, {email, password, rememberMe})
+        .then(res => res.data),
+    logout: () => instance
+        .delete(`auth/login`)
+        .then(res => res.data)
 }
 
 
