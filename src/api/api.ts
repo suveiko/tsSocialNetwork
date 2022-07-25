@@ -23,10 +23,10 @@ export const usersAPI = {
 }
 
 export const ProfileAPI = {
-    getProfileOfUser: (userId: string) => instance
+    getProfileOfUser: (userId: number) => instance
         .get<GetProfileType>(`profile/${userId}`)
         .then(res => res.data),
-    getStatus: (userId: string) => instance
+    getStatus: (userId: number) => instance
         .get<GetStatusType>(`profile/status/${userId}`)
         .then(res => res.data),
     updateStatus: (status: string) => instance

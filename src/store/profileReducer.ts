@@ -69,11 +69,11 @@ export const setUserProfile = (profile: GetProfileType) => ({type: "SET-USER-PRO
 export const setStatus = (status: string) => ({type: "SET-STATUS", status} as const)
 
 
-export const getProfileOfUser = (userId: string) => (dispatch: Dispatch) => {
+export const getProfileOfUser = (userId: number) => (dispatch: Dispatch) => {
     ProfileAPI.getProfileOfUser(userId)
         .then(data => dispatch(setUserProfile(data)))
 }
-export const getStatus = (userId: string) => (dispatch: Dispatch) => {
+export const getStatus = (userId: number) => (dispatch: Dispatch) => {
     ProfileAPI.getStatus(userId)
         .then(data => dispatch(setStatus(data)))
 }

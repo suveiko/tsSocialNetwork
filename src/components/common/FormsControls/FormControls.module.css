@@ -12,3 +12,8 @@ textarea {
     color: red;
     margin-left: 5px;
 }
+
+.formSummaryError {
+    padding: 5px;
+    color: red;
+}

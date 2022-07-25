@@ -6,13 +6,15 @@ import {Input} from "../../../common/FormsControls/FormControls";
 import {FormDataType} from "../Login";
 import {required} from "../../../../utils/validators/validators";
 
+import s from "../../../common/FormsControls/FormControls.module.css"
+
 
 type LoginFormType = {
     onSubmit: (formData: FormDataType) => void
 } & FormDataType
 
 
-const LoginForm: FC<InjectedFormProps<LoginFormType>> = ({handleSubmit}) => {
+const LoginForm: FC<InjectedFormProps<LoginFormType>> = ({handleSubmit, error}) => {
 
     return (
         <form onSubmit={handleSubmit}>
@@ -20,7 +22,7 @@ const LoginForm: FC<InjectedFormProps<LoginFormType>> = ({handleSubmit}) => {
                 <Field
                     placeholder='Login'
                     component={Input}
-                    name='login'
+                    name='email'
                     validate={[required]}
                 />
             </div>
@@ -41,6 +43,11 @@ const LoginForm: FC<InjectedFormProps<LoginFormType>> = ({handleSubmit}) => {
                 />
                 remember me
             </div>
+            {
+                error && <div className={s.formSummaryError}>
+                    {error}
+                </div>
+            }
             <div>
                 <button>Login</button>
             </div>
