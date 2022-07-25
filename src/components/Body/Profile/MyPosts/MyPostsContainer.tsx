@@ -12,7 +12,7 @@ export type MyPostsType = typeof mapDispatchToProps & ReturnType<typeof mapState
 const mapStateToProps = (state: StoreType) => {
     return {
         posts: state.profilePage.posts,
-    } as const
+    }
 }
 const mapDispatchToProps = {addPost}
 

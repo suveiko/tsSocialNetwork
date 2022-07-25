@@ -1,8 +1,9 @@
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {FC} from "react";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 import {FormDataType} from "../MyPosts";
 import {MaxLengthCreator, required} from "../../../../../utils/validators/validators";
+import {TextArea} from "../../../../common/FormsControls/FormControls";
 
 import s from "../MyPosts.module.css";
 
@@ -21,7 +22,7 @@ export const MyPostForm: FC<InjectedFormProps<MyPostFormType>> = ({handleSubmit}
         <form onSubmit={handleSubmit}>
             <div>
                 <Field
-                    component='textarea'
+                    component={TextArea}
                     name='newDialogBody'
                     placeholder='Enter your message'
                     validate={[required, maxLength10]}
