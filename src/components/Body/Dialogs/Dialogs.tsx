@@ -2,9 +2,10 @@ import {DialogsContainerType} from "./DialogsContainer";
 
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
+import {LoginReduxForm} from "./DialogForm/DialogForm";
 
 import s from "./Dialogs.module.css"
-import {LoginReduxForm} from "./DialogForm/DialogForm";
+
 
 
 export type FormDataType = {

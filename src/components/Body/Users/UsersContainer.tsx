@@ -1,5 +1,6 @@
 import {Component, FC} from "react";
 import {connect} from "react-redux";
+import {compose} from "redux";
 
 import {StoreType} from "../../../store/redux-store";
 import {
@@ -8,10 +9,11 @@ import {
 } from "../../../store/usersReducer";
 
 import Users from "./Users";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 import Preloader from "../../common/Preloader/Preloader";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {compose} from "redux";
+
+
 
 
 export type UsersType = ReturnType<typeof mapStateToProps>

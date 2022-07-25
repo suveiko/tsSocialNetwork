@@ -23,9 +23,7 @@ class HeaderContainer extends Component<HeaderComponentType> {
 }
 
 const mapStateToProps = (state: StoreType) => ({data: state.auth})
-const mapDispatchToProps = {
-    getAuthUserData
-}
+const mapDispatchToProps = {getAuthUserData}
 
 
 export default compose<FC>(
