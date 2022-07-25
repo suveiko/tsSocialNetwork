@@ -13,7 +13,6 @@ export type DialogsType = {
 }
 export type DialogsPageType = {
     messages: MessagesType[]
-    newMessageTextValue: string
     dialogs: DialogsType[]
 }
 
@@ -26,7 +25,6 @@ const initialState: DialogsPageType = {
         {id: v1(), message: 'Yo'},
         {id: v1(), message: 'Yo'}
     ],
-    newMessageTextValue: '',
     dialogs: [
         {id: v1(), name: 'Sasha'},
         {id: v1(), name: 'Artem'},
@@ -43,19 +41,15 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
             const newState = {
                 ...state, messages: [
                     ...state.messages,
-                    {id: v1(), message: state.newMessageTextValue}
+                    {id: v1(), message: action.newMessageBody}
                 ]
             }
-            newState.newMessageTextValue = ''
             return newState
-        case "UPDATE-NEW-MESSAGE-TEXT":
-            return {...state, newMessageTextValue: action.newMessage}
         default:
             return state
     }
 }
 
 
-export const addMessage = () => ({type: "ADD-MESSAGE"} as const)
-export const updateNewMessageText = (newMessage: string) => ({type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage} as const)
+export const addMessage = (newMessageBody: string) => ({type: "ADD-MESSAGE", newMessageBody} as const)
 

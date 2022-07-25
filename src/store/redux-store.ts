@@ -3,7 +3,7 @@ import {reducer as formReducer} from "redux-form"
 import thunk from "redux-thunk"
 
 import {addPost, profileReducer, setStatus, setUserProfile, updateNewPostText,} from "./profileReducer";
-import {addMessage, dialogsReducer, updateNewMessageText} from "./dialogsReducer";
+import {addMessage, dialogsReducer} from "./dialogsReducer";
 import {
     follow, setCurrentPage,
     setTotalUsersCount, setUsers,
@@ -19,7 +19,6 @@ export type StoreType = ReturnType<ReducerType>
 export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof addMessage>
-    | ReturnType<typeof updateNewMessageText>
     | ReturnType<typeof follow>
     | ReturnType<typeof unFollow>
     | ReturnType<typeof setUsers>

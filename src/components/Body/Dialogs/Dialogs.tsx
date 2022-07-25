@@ -1,18 +1,18 @@
-import {ChangeEvent, KeyboardEvent} from "react";
-
 import {DialogsContainerType} from "./DialogsContainer";
 
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
 
 import s from "./Dialogs.module.css"
+import {LoginReduxForm} from "./DialogForm/DialogForm";
 
 
+export type FormDataType = {
+    newMessageBody: string
+}
 
-export const Dialogs = ({
-                            updateNewMessageText, dialogs, messages,
-                            newMessageTextValue, addMessage
-                        }: DialogsContainerType) => {
+
+export const Dialogs = ({dialogs, messages, addMessage}: DialogsContainerType) => {
 
     const dialogsElement = dialogs.map(({id, name}) =>
         <DialogItem
@@ -28,12 +28,8 @@ export const Dialogs = ({
         />
     )
 
-    const addNewMessage = () => addMessage()
-    const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
-        updateNewMessageText(e.currentTarget.value)
-    }
-    const onKeyInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        e.key === 'Enter' && newMessageTextValue.trim() !== '' && addNewMessage()
+    const onSubmit = (value: FormDataType) => {
+        addMessage(value.newMessageBody)
     }
 
     return (
@@ -44,16 +40,8 @@ export const Dialogs = ({
             <div className={s.messages}>
                 {messagesElement}
             </div>
-            <button className={s.button}
-                    onClick={addNewMessage}
-                    disabled={newMessageTextValue.trim() === ''}
-            >
-                Add message
-            </button>
-            <input
-                value={newMessageTextValue}
-                onChange={onChangeMessage}
-                onKeyUp={onKeyInputHandler}
+            <LoginReduxForm
+                onSubmit={onSubmit}
             />
         </div>
     )

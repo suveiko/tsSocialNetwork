@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {StoreType} from "../../../store/redux-store";
-import {addMessage, updateNewMessageText} from '../../../store/dialogsReducer'
+import {addMessage} from '../../../store/dialogsReducer'
 
 import {Dialogs} from "./Dialogs";
 
@@ -16,10 +16,9 @@ const mapStateToProps = (state: StoreType) => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageTextValue: state.dialogsPage.newMessageTextValue,
     }
 }
-const mapDispatchToProps = {addMessage, updateNewMessageText}
+const mapDispatchToProps = {addMessage}
 
 
 export default compose<FC>(
