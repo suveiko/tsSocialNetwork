@@ -14,19 +14,19 @@ import {GetProfileType} from "../../../api/api";
 export type MapStateToPropsType = {
     profile: GetProfileType
     status: string
-    authorizedUserId: number
+    authorizedUserId: number | null
     isAuth: boolean
 }
 export type ProfileType = MapStateToPropsType
     & typeof mapDispatchToProps
-    & RouteComponentProps<{ userId: any }>
+    & RouteComponentProps<{ userId: string }>
 
 
 class ProfileContainer extends Component<ProfileType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = this.props.authorizedUserId
+            userId = String(this.props.authorizedUserId)
         }
         this.props.getProfileOfUser(+userId)
         this.props.getStatus(+userId)

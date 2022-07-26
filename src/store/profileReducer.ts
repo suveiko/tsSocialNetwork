@@ -35,7 +35,7 @@ const initialState: ProfilePageType = {
         lookingForAJob: true,
         lookingForAJobDescription: '',
         fullName: '',
-        userId: 1,
+        userId: 0,
         photos: {
             small: '',
             large: '',
