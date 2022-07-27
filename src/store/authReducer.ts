@@ -12,10 +12,6 @@ export type AuthReducerDataType = {
     email: string | null
     isAuth: boolean
 }
-type AuthReducerActionsTypes = | ReturnType<typeof setAuthUserData>
-    | FormAction
-type AuthReducerThunkType<ReturnType = void> = ThunkAction<ReturnType
-    | Promise<ReturnType>, StoreType, unknown, AuthReducerActionsTypes>
 
 
 const initialState: AuthReducerDataType = {
@@ -41,32 +37,29 @@ export const setAuthUserData = (id: number | null, login: string | null, email: 
 } as const)
 
 
-export const getAuthUserData = (): AuthReducerThunkType => (dispatch) => {
-    AuthAPI.me()
-        .then(data => {
-            if (data.resultCode === 0) {
-                const {id, login, email} = data.data
-                dispatch(setAuthUserData(id, login, email, true))
-            }
-        })
+export const getAuthUserData = (): AuthReducerThunkType => async dispatch => {
+    const data = await AuthAPI.me()
+    if (data.resultCode === 0) {
+        const {id, login, email} = data.data
+        dispatch(setAuthUserData(id, login, email, true))
+    }
 }
-export const logMe = (email: string, password: string, rememberMe: boolean): AuthReducerThunkType => (dispatch) => {
-    AuthAPI.login(email, password, rememberMe)
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(getAuthUserData())
-            } else {
-                const message = data.messages.length > 0 ? data.messages[0] : 'Some error'
-                dispatch(stopSubmit('login', {_error: message}))
-            }
-        })
+export const logMe = (email: string, password: string, rememberMe: boolean): AuthReducerThunkType => async dispatch => {
+    const data = await AuthAPI.login(email, password, rememberMe)
+    if (data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        const message = data.messages.length > 0 ? data.messages[0] : 'Some error'
+        dispatch(stopSubmit('login', {_error: message}))
+    }
 }
-export const logout = (): AuthReducerThunkType => (dispatch) => {
-    AuthAPI.logout()
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false))
-            }
-        })
+export const logout = (): AuthReducerThunkType => async dispatch => {
+    const data = await AuthAPI.logout()
+    data.resultCode === 0 && dispatch(setAuthUserData(null, null, null, false))
 }
 
+
+type AuthReducerActionsTypes = | ReturnType<typeof setAuthUserData>
+    | FormAction
+type AuthReducerThunkType<ReturnType = void> = ThunkAction<ReturnType
+    | Promise<ReturnType>, StoreType, unknown, AuthReducerActionsTypes>

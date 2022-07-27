@@ -16,20 +16,14 @@ class ProfileStatus extends Component<ProfileStatusType> {
     }
 
     activateEditMode = () => {
-        this.setState({
-            editMode: true
-        })
+        this.setState({editMode: true})
     }
     deactivateEditMode = () => {
-        this.setState({
-            editMode: false
-        })
+        this.setState({editMode: false})
         this.props.updateStatus(this.state.status)
     }
     onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            status: e.currentTarget.value
-        })
+        this.setState({status: e.currentTarget.value})
     }
 
     componentDidUpdate(prevProps: ProfileStatusType, prevState: { editMode: boolean, status: '' }) {

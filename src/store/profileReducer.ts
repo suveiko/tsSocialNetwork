@@ -6,12 +6,6 @@ import {Dispatch} from "redux";
 import {GetProfileType, PostType, ProfileAPI} from "../api/api";
 
 
-export type ProfilePageType = {
-    posts: PostType[]
-    profile: GetProfileType
-    status: string
-}
-
 const initialState: ProfilePageType = {
     posts: [
         {id: v1(), likes: 10, message: 'Hello, Im Sasha'},
@@ -44,6 +38,7 @@ const initialState: ProfilePageType = {
     status: ''
 }
 
+
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST":
@@ -69,16 +64,23 @@ export const setUserProfile = (profile: GetProfileType) => ({type: "SET-USER-PRO
 export const setStatus = (status: string) => ({type: "SET-STATUS", status} as const)
 
 
-export const getProfileOfUser = (userId: number) => (dispatch: Dispatch) => {
-    ProfileAPI.getProfileOfUser(userId)
-        .then(data => dispatch(setUserProfile(data)))
+export const getProfileOfUser = (userId: number) => async (dispatch: Dispatch) => {
+    const data = await ProfileAPI.getProfileOfUser(userId)
+    dispatch(setUserProfile(data))
 }
-export const getStatus = (userId: number) => (dispatch: Dispatch) => {
-    ProfileAPI.getStatus(userId)
-        .then(data => dispatch(setStatus(data)))
+export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
+    const data = await ProfileAPI.getStatus(userId)
+    dispatch(setStatus(data))
 }
-export const updateStatus = (status: string) => (dispatch: Dispatch) => {
-    ProfileAPI.updateStatus(status)
-        .then(data => data.resultCode === 0 && dispatch(setStatus(status)))
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    const data = await ProfileAPI.updateStatus(status)
+    data.resultCode === 0 && dispatch(setStatus(status))
+}
+
+
+export type ProfilePageType = {
+    posts: PostType[]
+    profile: GetProfileType
+    status: string
 }
 

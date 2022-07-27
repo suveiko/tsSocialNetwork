@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {reducer as formReducer} from "redux-form"
-import thunk from "redux-thunk"
+import thunk, {ThunkAction} from "redux-thunk"
 
 import {addPost, profileReducer, setStatus, setUserProfile,} from "./profileReducer";
 import {addMessage, dialogsReducer} from "./dialogsReducer";
@@ -14,9 +14,21 @@ import {
 import {authReducer, setAuthUserData} from "./authReducer";
 
 
+const rootReducer = combineReducers({
+    profilePage: profileReducer,
+    dialogsPage: dialogsReducer,
+    usersPage: usersReducer,
+    auth: authReducer,
+    form: formReducer
+})
+export const store = createStore(rootReducer, applyMiddleware(thunk))
+
+
 export type ReducerType = typeof rootReducer
 export type StoreType = ReturnType<ReducerType>
-export type ActionsType = ReturnType<typeof addPost>
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, StoreType, unknown, ActionsType>
+export type ActionsType =
+    | ReturnType<typeof addPost>
     | ReturnType<typeof addMessage>
     | ReturnType<typeof follow>
     | ReturnType<typeof unFollow>
@@ -28,17 +40,6 @@ export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatus>
-
-
-const rootReducer = combineReducers({
-    profilePage: profileReducer,
-    dialogsPage: dialogsReducer,
-    usersPage: usersReducer,
-    auth: authReducer,
-    form: formReducer
-})
-
-export const store = createStore(rootReducer, applyMiddleware(thunk))
 
 
 // @ts-ignore for dev
