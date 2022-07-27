@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import {LoginReduxForm} from "./LoginForm/LoginForm";
 import {logMe} from "../../../store/authReducer";
-import {StoreType} from "../../../store/redux-store";
+import {StoreType} from "../../../store/store";
 
 
 export type FormDataType = {

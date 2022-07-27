@@ -3,7 +3,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {StoreType} from "../../../store/redux-store";
+import {StoreType} from "../../../store/store";
 import {addMessage} from '../../../store/dialogsReducer'
 
 import {Dialogs} from "./Dialogs";

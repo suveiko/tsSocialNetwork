@@ -1,4 +1,4 @@
-import {ActionsType, AppThunk} from "./redux-store";
+import {ActionsType, AppThunk} from "./store";
 
 import {usersAPI, UserType} from "../api/api";
 

@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 
-import {ActionsType} from "./redux-store";
+import {ActionsType} from "./store";
 import {Dispatch} from "redux";
 
 import {GetProfileType, PostType, ProfileAPI} from "../api/api";

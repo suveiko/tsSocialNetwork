@@ -2,14 +2,13 @@ import {Component, FC} from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 
-import {StoreType} from "../../../store/redux-store";
+import {StoreType} from "../../../store/store";
 import {
     getUsers, onChangeUsers,
     unFollowFromUser, followOnUser
 } from "../../../store/usersReducer";
 
 import Users from "./Users";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 import Preloader from "../../common/Preloader/Preloader";
 
@@ -58,7 +57,6 @@ const mapDispatchToProps = {
 
 export default compose<FC>(
     connect(mapStateToProps, mapDispatchToProps),
-    WithAuthRedirect
 )(UsersContainer)
 
 

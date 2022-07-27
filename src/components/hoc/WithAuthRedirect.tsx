@@ -2,7 +2,7 @@ import {FC} from "react";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
-import {StoreType} from "../../store/redux-store";
+import {StoreType} from "../../store/store";
 
 
 type MapStateToPropsType = {

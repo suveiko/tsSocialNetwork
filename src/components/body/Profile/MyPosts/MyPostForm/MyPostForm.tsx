@@ -2,10 +2,12 @@ import {FC} from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 import {FormDataType} from "../MyPosts";
+
 import {MaxLengthCreator, required} from "../../../../../utils/validators/validators";
 import {TextArea} from "../../../../common/FormsControls/FormControls";
 
 import s from "../MyPosts.module.css";
+
 
 
 type MyPostFormType = {

@@ -1,11 +1,11 @@
 import {Component, FC} from "react";
 import {connect} from "react-redux";
+import {compose} from "redux";
 
 import {Header} from "./Header";
 
-import {StoreType} from "../../store/redux-store";
-import {getAuthUserData, logout} from "../../store/authReducer";
-import {compose} from "redux";
+import {StoreType} from "../../store/store";
+import {logout} from "../../store/authReducer";
 
 
 export type HeaderComponentType = ReturnType<typeof mapStateToProps>
@@ -13,17 +13,13 @@ export type HeaderComponentType = ReturnType<typeof mapStateToProps>
 
 
 class HeaderContainer extends Component<HeaderComponentType> {
-    componentDidMount() {
-        this.props.getAuthUserData()
-    }
-
     render() {
         return <Header {...this.props}/>
     }
 }
 
 const mapStateToProps = (state: StoreType) => ({data: state.auth})
-const mapDispatchToProps = {getAuthUserData, logout}
+const mapDispatchToProps = {logout}
 
 
 export default compose<FC>(

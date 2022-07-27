@@ -1,17 +1,9 @@
 import {FormAction, stopSubmit} from "redux-form";
 import {ThunkAction} from "redux-thunk";
 
-import {ActionsType, StoreType} from "./redux-store";
+import {ActionsType, StoreType} from "./store";
 
 import {AuthAPI} from "../api/api";
-
-
-export type AuthReducerDataType = {
-    id: number | null
-    login: string | null
-    email: string | null
-    isAuth: boolean
-}
 
 
 const initialState: AuthReducerDataType = {
@@ -30,6 +22,7 @@ export const authReducer = (state: AuthReducerDataType = initialState, action: A
             return state
     }
 }
+
 
 export const setAuthUserData = (id: number | null, login: string | null, email: string | null, isAuth: boolean) => ({
     type: 'SET-USERS-DATA',
@@ -61,5 +54,11 @@ export const logout = (): AuthReducerThunkType => async dispatch => {
 
 type AuthReducerActionsTypes = | ReturnType<typeof setAuthUserData>
     | FormAction
-type AuthReducerThunkType<ReturnType = void> = ThunkAction<ReturnType
+export type AuthReducerThunkType<ReturnType = void> = ThunkAction<ReturnType
     | Promise<ReturnType>, StoreType, unknown, AuthReducerActionsTypes>
+export type AuthReducerDataType = {
+    id: number | null
+    login: string | null
+    email: string | null
+    isAuth: boolean
+}

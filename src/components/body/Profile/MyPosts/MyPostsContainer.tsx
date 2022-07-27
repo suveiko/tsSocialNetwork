@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 
 import {addPost} from '../../../../store/profileReducer'
-import {StoreType} from "../../../../store/redux-store";
+import {StoreType} from "../../../../store/store";
 
 import {MyPosts} from "./MyPosts";
 

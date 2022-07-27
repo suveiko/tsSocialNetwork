@@ -12,6 +12,7 @@ import {
     usersReducer
 } from "./usersReducer";
 import {authReducer, setAuthUserData} from "./authReducer";
+import {appReducer} from "./appReducer";
 
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    app: appReducer,
     form: formReducer
 })
 export const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -40,6 +42,7 @@ export type ActionsType =
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatus>
+
 
 
 // @ts-ignore for dev
