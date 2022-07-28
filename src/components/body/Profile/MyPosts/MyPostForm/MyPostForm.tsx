@@ -9,7 +9,6 @@ import {TextArea} from "../../../../common/FormsControls/FormControls";
 import s from "../MyPosts.module.css";
 
 
-
 type MyPostFormType = {
     onSubmit: (formData: FormDataType) => void
 } & FormDataType
