@@ -1,5 +1,5 @@
 import {ProfileType} from "../ProfileContainer";
-import ProfileStatus from "./ProfileStatus"
+import {ProfileStatus} from "./ProfileStatus"
 
 import Preloader from "../../../common/Preloader/Preloader";
 
