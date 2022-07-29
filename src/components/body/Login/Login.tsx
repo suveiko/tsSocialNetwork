@@ -1,10 +1,10 @@
-import {FC} from "react";
 import {Redirect} from "react-router-dom";
-import {connect} from "react-redux";
+
+import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
 
 import {LoginReduxForm} from "./LoginForm/LoginForm";
+
 import {logMe} from "../../../store/authReducer/authReducer";
-import {StoreType} from "../../../store/store";
 import {getLoginAuth} from "../../../store/authReducer/authSelectors";
 
 
@@ -13,13 +13,13 @@ export type FormDataType = {
     password: string
     rememberMe: boolean
 }
-type PropsType = typeof mapDispatchToProps & ReturnType<typeof mapStateToProps>
 
-
-const Login = ({logMe, isAuth}: PropsType) => {
+const Login = () => {
+    const isAuth = useAppSelector(getLoginAuth)
+    const dispatch = useAppDispatch()
 
     const onSubmit = (formData: FormDataType) => {
-        logMe(formData.email, formData.password, formData.rememberMe)
+        dispatch(logMe(formData.email, formData.password, formData.rememberMe))
     }
 
     if (isAuth) return <Redirect to={'/profile'}/>
@@ -33,10 +33,4 @@ const Login = ({logMe, isAuth}: PropsType) => {
 }
 
 
-const mapStateToProps = (state: StoreType) => ({
-    isAuth: getLoginAuth(state)
-})
-const mapDispatchToProps = {logMe}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login as FC)
+export default Login

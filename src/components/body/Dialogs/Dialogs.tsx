@@ -1,11 +1,13 @@
-import {DialogsContainerType} from "./DialogsContainer";
+import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
 
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from "./Message/Message";
 import {LoginReduxForm} from "./DialogForm/DialogForm";
 
-import s from "./Dialogs.module.css"
+import {addMessage} from "../../../store/dialogReducer/dialogsReducer";
+import {getDialogs, getMessages} from "../../../store/dialogReducer/dialogsSelectors";
 
+import s from "./Dialogs.module.css"
 
 
 export type FormDataType = {
@@ -13,7 +15,10 @@ export type FormDataType = {
 }
 
 
-export const Dialogs = ({dialogs, messages, addMessage}: DialogsContainerType) => {
+const Dialogs = () => {
+    const dialogs = useAppSelector(getDialogs)
+    const messages = useAppSelector(getMessages)
+    const dispatch = useAppDispatch()
 
     const dialogsElement = dialogs.map(({id, name}) =>
         <DialogItem
@@ -30,7 +35,7 @@ export const Dialogs = ({dialogs, messages, addMessage}: DialogsContainerType) =
     )
 
     const onSubmit = (value: FormDataType) => {
-        addMessage(value.newMessageBody)
+        dispatch(addMessage(value.newMessageBody))
     }
 
     return (
@@ -47,3 +52,6 @@ export const Dialogs = ({dialogs, messages, addMessage}: DialogsContainerType) =
         </div>
     )
 }
+
+
+export default Dialogs

@@ -42,7 +42,7 @@ const Users = () => {
             {
                 isFetching
                     ? <Preloader/>
-                    : <div>
+                    : <>
                         <div>
                             {
                                 pages.map(p => (
@@ -61,7 +61,7 @@ const Users = () => {
                                     user={user}
                                 />
                             )}
-                    </div>
+                    </>
             }
         </div>
     );
