@@ -1,9 +1,9 @@
 import {FormAction, stopSubmit} from "redux-form";
 import {ThunkAction} from "redux-thunk";
 
-import {ActionsType, StoreType} from "./store";
+import {ActionsType, StoreType} from "../store";
 
-import {AuthAPI} from "../api/api";
+import {AuthAPI} from "../../api/api";
 
 
 const initialState: AuthReducerDataType = {

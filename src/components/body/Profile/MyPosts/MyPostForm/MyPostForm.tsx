@@ -1,4 +1,3 @@
-import {FC} from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 import {FormDataType} from "../MyPosts";
@@ -17,7 +16,7 @@ type MyPostFormType = {
 const maxLength10 = MaxLengthCreator(10)
 
 
-export const MyPostForm: FC<InjectedFormProps<MyPostFormType>> = ({handleSubmit}) => {
+export const MyPostForm = ({handleSubmit}: InjectedFormProps<MyPostFormType>) => {
 
     return (
         <form onSubmit={handleSubmit}>

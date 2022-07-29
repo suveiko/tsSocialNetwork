@@ -5,7 +5,7 @@ import {compose} from "redux";
 import {Header} from "./Header";
 
 import {StoreType} from "../../store/store";
-import {logout} from "../../store/authReducer";
+import {logout} from "../../store/authReducer/authReducer";
 
 
 export type HeaderComponentType = ReturnType<typeof mapStateToProps>

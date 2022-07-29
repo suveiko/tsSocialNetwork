@@ -1,4 +1,4 @@
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import {Dispatch} from "redux";
 
 
@@ -20,6 +20,10 @@ export const ProfileStatus = ({updateStatus, status}: ProfileStatusType) => {
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setNewStatus(e.currentTarget.value)
     }
+
+    useEffect(() => {
+        setNewStatus(status)
+    }, [status])
 
     return (
         <div>

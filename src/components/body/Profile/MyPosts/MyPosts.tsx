@@ -1,6 +1,10 @@
-import {MyPostsType} from "./MyPostsContainer";
+import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
+
 import {Post} from "./Post/Post";
 import {MyPostReduxForm} from "./MyPostForm/MyPostForm";
+
+import {addPost} from "../../../../store/profileReducer/profileReducer";
+import {getProfilePosts} from "../../../../store/profileReducer/profileSelectors";
 
 import s from "./MyPosts.module.css"
 
@@ -10,7 +14,9 @@ export type FormDataType = {
 }
 
 
-export const MyPosts = ({posts, addPost}: MyPostsType) => {
+export const MyPosts = () => {
+    const posts = useAppSelector(getProfilePosts)
+    const dispatch = useAppDispatch()
 
     const postsElements = posts.map((({id, message, likes}) =>
             <Post
@@ -21,7 +27,7 @@ export const MyPosts = ({posts, addPost}: MyPostsType) => {
     ))
 
     const onSubmit = (value: FormDataType) => {
-        addPost(value.newDialogBody)
+        dispatch(addPost(value.newDialogBody))
     }
 
     return (

@@ -10,12 +10,14 @@ import HeaderContainer from "../components/header/HeaderContainer";
 import Login from "../components/body/Login/Login";
 import Navbar from "../components/navbar/Navbar";
 
-import {initializeApp} from "../store/appReducer";
+import {initializeApp} from "../store/appReducer/appReducer";
+import {getAppInitialized} from "../store/appReducer/appSelectors";
 import {StoreType} from "../store/store";
 
 import Preloader from "../components/common/Preloader/Preloader";
 
 import './App.css';
+
 
 
 type AppType = typeof mapDispatchToProps & ReturnType<typeof mapStateToProps>
@@ -46,7 +48,7 @@ class App extends Component<AppType> {
 }
 
 const mapStateToProps = (state: StoreType) => ({
-    state: state.app.initialized
+    state: getAppInitialized(state)
 })
 const mapDispatchToProps = {initializeApp}
 

@@ -1,9 +1,9 @@
 import {v1} from "uuid";
 
-import {ActionsType} from "./store";
+import {ActionsType} from "../store";
 import {Dispatch} from "redux";
 
-import {GetProfileType, PostType, ProfileAPI} from "../api/api";
+import {GetProfileType, PostType, ProfileAPI} from "../../api/api";
 
 
 const initialState: ProfilePageType = {

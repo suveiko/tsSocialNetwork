@@ -1,4 +1,4 @@
-import {AuthReducerThunkType, getAuthUserData} from "./authReducer";
+import {AuthReducerThunkType, getAuthUserData} from "../authReducer/authReducer";
 
 
 const initialState: AppReducerType = {

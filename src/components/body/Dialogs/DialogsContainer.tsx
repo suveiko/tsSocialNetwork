@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {StoreType} from "../../../store/store";
-import {addMessage} from '../../../store/dialogsReducer'
+import {addMessage} from '../../../store/dialogReducer/dialogsReducer'
+import {getDialogs, getMessages} from "../../../store/dialogReducer/dialogsSelectors";
 
 import {Dialogs} from "./Dialogs";
 
@@ -14,8 +15,8 @@ export type DialogsContainerType = ReturnType<typeof mapStateToProps> & typeof m
 
 const mapStateToProps = (state: StoreType) => {
     return {
-        dialogs: state.dialogsPage.dialogs,
-        messages: state.dialogsPage.messages,
+        dialogs: getDialogs(state),
+        messages: getMessages(state)
     }
 }
 const mapDispatchToProps = {addMessage}

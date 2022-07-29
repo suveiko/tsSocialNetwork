@@ -6,7 +6,9 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {Profile} from "./Profile";
 
 import {StoreType} from "../../../store/store";
-import {getProfileOfUser, getStatus, setUserProfile, updateStatus} from "../../../store/profileReducer";
+import {getProfileOfUser, getStatus, setUserProfile, updateStatus} from "../../../store/profileReducer/profileReducer";
+import {getProfile, getProfileStatus} from "../../../store/profileReducer/profileSelectors";
+import {getAuthorizedUserId, getLoginAuth} from "../../../store/authReducer/authSelectors";
 
 import {GetProfileType} from "../../../api/api";
 
@@ -42,10 +44,10 @@ class ProfileContainer extends Component<ProfileType> {
 
 const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     return {
-        profile: state.profilePage.profile,
-        status: state.profilePage.status,
-        authorizedUserId: state.auth.id,
-        isAuth: state.auth.isAuth
+        profile: getProfile(state),
+        status: getProfileStatus(state),
+        authorizedUserId: getAuthorizedUserId(state),
+        isAuth: getLoginAuth(state)
     }
 }
 const mapDispatchToProps = {

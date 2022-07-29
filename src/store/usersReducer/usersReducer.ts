@@ -1,6 +1,6 @@
-import {ActionsType, AppThunk} from "./store";
+import {ActionsType, AppThunk} from "../store";
 
-import {usersAPI, UserType} from "../api/api";
+import {usersAPI, UserType} from "../../api/api";
 
 
 const initialState: UsersPageType = {

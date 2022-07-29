@@ -3,8 +3,9 @@ import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {LoginReduxForm} from "./LoginForm/LoginForm";
-import {logMe} from "../../../store/authReducer";
+import {logMe} from "../../../store/authReducer/authReducer";
 import {StoreType} from "../../../store/store";
+import {getLoginAuth} from "../../../store/authReducer/authSelectors";
 
 
 export type FormDataType = {
@@ -33,7 +34,7 @@ const Login = ({logMe, isAuth}: PropsType) => {
 
 
 const mapStateToProps = (state: StoreType) => ({
-    isAuth: state.auth.isAuth
+    isAuth: getLoginAuth(state)
 })
 const mapDispatchToProps = {logMe}
 

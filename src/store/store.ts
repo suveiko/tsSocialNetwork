@@ -1,18 +1,18 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {reducer as formReducer} from "redux-form"
-import thunk, {ThunkAction} from "redux-thunk"
+import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk"
 
-import {addPost, profileReducer, setStatus, setUserProfile,} from "./profileReducer";
-import {addMessage, dialogsReducer} from "./dialogsReducer";
+import {addPost, profileReducer, setStatus, setUserProfile,} from "./profileReducer/profileReducer";
+import {addMessage, dialogsReducer} from "./dialogReducer/dialogsReducer";
 import {
     follow, setCurrentPage,
     setTotalUsersCount, setUsers,
     toggleFollowingProgress,
     toggleIsFetching, unFollow,
     usersReducer
-} from "./usersReducer";
-import {authReducer, setAuthUserData} from "./authReducer";
-import {appReducer} from "./appReducer";
+} from "./usersReducer/usersReducer";
+import {authReducer, setAuthUserData} from "./authReducer/authReducer";
+import {appReducer} from "./appReducer/appReducer";
 
 
 const rootReducer = combineReducers({
@@ -29,6 +29,7 @@ export const store = createStore(rootReducer, applyMiddleware(thunk))
 export type ReducerType = typeof rootReducer
 export type StoreType = ReturnType<ReducerType>
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, StoreType, unknown, ActionsType>
+export type AppDispatch = ThunkDispatch<StoreType, unknown, ActionsType>
 export type ActionsType =
     | ReturnType<typeof addPost>
     | ReturnType<typeof addMessage>

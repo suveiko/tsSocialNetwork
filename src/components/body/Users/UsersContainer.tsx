@@ -6,16 +6,17 @@ import {StoreType} from "../../../store/store";
 import {
     requestUsers, onChangeUsers,
     unFollowFromUser, followOnUser
-} from "../../../store/usersReducer";
-
-import Users from "./Users";
-
-import Preloader from "../../common/Preloader/Preloader";
+} from "../../../store/usersReducer/usersReducer";
 import {
     getCurrentPage, getFollowingInProgress,
     getIsFetching, getPageSize,
     getTotalUserCount, getUsers
-} from "../../../store/usersSelectors";
+} from "../../../store/usersReducer/usersSelectors";
+
+import Users from "./Users";
+
+import Preloader from "../../common/Preloader/Preloader";
+
 
 
 export type UsersType = ReturnType<typeof mapStateToProps>
