@@ -1,15 +1,18 @@
 import {NavLink} from "react-router-dom";
 
-import {HeaderComponentType} from "./HeaderContainer";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+
+import {logout} from "../../store/authReducer/authReducer";
 
 import s from './Header.module.css';
 
 
-export const Header = ({data, logout}: HeaderComponentType) => {
+const Header = () => {
+    const {isAuth, login} = useAppSelector(state => state.auth)
+    const dispatch = useAppDispatch()
 
-    const {isAuth, login} = data
     const logoutHandler = () => {
-        logout()
+        dispatch(logout())
     }
 
     return (
@@ -28,3 +31,6 @@ export const Header = ({data, logout}: HeaderComponentType) => {
         </header>
     )
 }
+
+
+export default Header
