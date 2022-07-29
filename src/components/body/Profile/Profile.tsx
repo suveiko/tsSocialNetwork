@@ -1,15 +1,40 @@
-import {ProfileType} from "./ProfileContainer";
-import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {NavLink, useParams} from "react-router-dom";
 
-import s from "./Profile.module.css"
+import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
+
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+
+import {getProfileOfUser, getStatus} from "../../../store/profileReducer/profileReducer";
+import {getAuthorizedUserId, getLoginAuth} from "../../../store/authReducer/authSelectors";
+
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
 
+import s from "./Profile.module.css"
 
-export const Profile = (props: ProfileType) => {
+
+const Profile = () => {
+    const isAuth = useAppSelector(getLoginAuth)
+    const authorizedUserId = useAppSelector(getAuthorizedUserId)
+    const dispatch = useAppDispatch()
+    let {userId} = useParams<{ userId: string }>();
+
+    if (!userId) {
+        userId = String(authorizedUserId)
+    }
+
+    userId && dispatch(getProfileOfUser(+userId))
+    userId && dispatch(getStatus(+userId))
+
+    if (!isAuth) return <NavLink to={'/login'}/>
+
     return (
         <div className={s.container}>
-            <ProfileInfo {...props}/>
+            <ProfileInfo/>
             <MyPosts/>
         </div>
     )
 }
+
+
+export default WithAuthRedirect(Profile)

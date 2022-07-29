@@ -1,13 +1,16 @@
-import {ProfileType} from "../ProfileContainer";
 import {ProfileStatus} from "./ProfileStatus"
 
 import Preloader from "../../../common/Preloader/Preloader";
 
 import s from "./ProfileInfo.module.css";
 import avatar from "../../../../assets/user-icon.png"
+import {useAppSelector} from "../../../../hooks/hooks";
+import {getProfile} from "../../../../store/profileReducer/profileSelectors";
 
 
-export const ProfileInfo = ({profile, status, updateStatus}: ProfileType) => {
+
+export const ProfileInfo = () => {
+    const profile = useAppSelector(getProfile)
 
     if (!profile) return <Preloader/>
 
@@ -19,7 +22,7 @@ export const ProfileInfo = ({profile, status, updateStatus}: ProfileType) => {
                     src={!profile.photos.small ? avatar : profile.photos.small}
                     alt="avatar"
                 />
-                <ProfileStatus status={status} updateStatus={updateStatus}/>
+                <ProfileStatus />
                 <div>{profile.fullName}</div>
                 <div>{profile.lookingForAJobDescription}</div>
                 <div>My Github - {profile.contacts.github}</div>

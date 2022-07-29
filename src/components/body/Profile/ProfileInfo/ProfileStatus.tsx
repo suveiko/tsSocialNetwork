@@ -1,21 +1,23 @@
 import {ChangeEvent, useEffect, useState} from "react";
-import {Dispatch} from "redux";
+import {useDispatch} from "react-redux";
+
+import {useAppSelector} from "../../../../hooks/hooks";
+
+import {updateStatus} from "../../../../store/profileReducer/profileReducer";
+import {getProfileStatus} from "../../../../store/profileReducer/profileSelectors";
 
 
-type ProfileStatusType = {
-    status: string
-    updateStatus: (status: string) => (dispatch: Dispatch) => void
-}
+export const ProfileStatus = () => {
+    const dispatch = useDispatch()
+    const status = useAppSelector(getProfileStatus)
 
-
-export const ProfileStatus = ({updateStatus, status}: ProfileStatusType) => {
     const [editMode, setEditMode] = useState<boolean>(true)
     const [newStatus, setNewStatus] = useState<string>(status)
 
     const activateEditMode = () => setEditMode(false)
     const deactivateEditMode = () => {
         setEditMode(true)
-        updateStatus(newStatus)
+        dispatch(updateStatus(newStatus))
     }
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setNewStatus(e.currentTarget.value)
