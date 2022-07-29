@@ -1,12 +1,12 @@
-import {ProfileStatus} from "./ProfileStatus"
+import {useAppSelector} from "../../../../hooks/hooks";
+
+import {ProfileStatus} from "./ProfileStatus/ProfileStatus"
+import {getProfile} from "../../../../store/profileReducer/profileSelectors";
 
 import Preloader from "../../../common/Preloader/Preloader";
 
 import s from "./ProfileInfo.module.css";
 import avatar from "../../../../assets/user-icon.png"
-import {useAppSelector} from "../../../../hooks/hooks";
-import {getProfile} from "../../../../store/profileReducer/profileSelectors";
-
 
 
 export const ProfileInfo = () => {

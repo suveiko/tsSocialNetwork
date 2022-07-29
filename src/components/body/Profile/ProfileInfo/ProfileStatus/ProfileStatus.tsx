@@ -1,10 +1,10 @@
 import {ChangeEvent, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 
-import {useAppSelector} from "../../../../hooks/hooks";
+import {useAppSelector} from "../../../../../hooks/hooks";
 
-import {updateStatus} from "../../../../store/profileReducer/profileReducer";
-import {getProfileStatus} from "../../../../store/profileReducer/profileSelectors";
+import {updateStatus} from "../../../../../store/profileReducer/profileReducer";
+import {getProfileStatus} from "../../../../../store/profileReducer/profileSelectors";
 
 
 export const ProfileStatus = () => {

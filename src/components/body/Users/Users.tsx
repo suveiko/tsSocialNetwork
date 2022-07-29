@@ -1,23 +1,29 @@
-import {NavLink} from "react-router-dom";
+import {useEffect} from "react";
 
-import {UsersType} from "./UsersContainer";
+import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
 
-import avatar from '../../../assets/user-icon.png'
+import {
+    getCurrentPage, getIsFetching,
+    getPageSize, getTotalUserCount, getUsers
+} from "../../../store/usersReducer/usersSelectors";
+import {onChangeUsers, requestUsers} from "../../../store/usersReducer/usersReducer";
+
+import User from "./User/User";
+
+import Preloader from "../../common/Preloader/Preloader";
+
 import s from './Users.module.css'
 
 
-type UsersPropsType = {
-    onPageChanged: (page: number) => void
-} & UsersType
+const Users = () => {
 
+    const isFetching = useAppSelector(getIsFetching)
+    const users = useAppSelector(getUsers)
+    const currentPage = useAppSelector(getCurrentPage)
+    const pageSize = useAppSelector(getPageSize)
+    const totalUsersCount = useAppSelector(getTotalUserCount)
 
-const Users = ({
-                   totalUsersCount, pageSize,
-                   onPageChanged, currentPage,
-                   users, followOnUser,
-                   followingInProgress,
-                   unFollowFromUser,
-               }: UsersPropsType) => {
+    const dispatch = useAppDispatch()
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
     const pages = []
@@ -25,61 +31,38 @@ const Users = ({
         pages.push(i)
     }
 
-    const onClickUnFollowFromUser = (id: number) => unFollowFromUser(id)
-    const onClickFollowOnUser = (id: number) => followOnUser(id)
+    const onPageChanged = (page: number) => dispatch(onChangeUsers(page, pageSize))
+
+    useEffect(() => {
+        dispatch(requestUsers(currentPage, pageSize))
+    }, [dispatch])
 
     return (
         <div className={s.container}>
-            <div>
-                {
-                    pages.map(p => (
-                        <span
-                            key={`${currentPage}-${p}`}
-                            onClick={() => onPageChanged(p)}
-                            className={currentPage === p ? s.selectedPage : s.page}
-                        >{p}
-                        </span>
-                    ))
-                }
-            </div>
             {
-                users.map(u => <div key={u.id}>
-            <div>
-                <div>
-                    <NavLink to={'/profile/' + u.id}>
-                        <img
-                            src={u.photos.small !== null ? u.photos.small : avatar}
-                            alt="avatar"
-                            className={s.userPhoto}
-                        />
-                    </NavLink>
-                </div>
-                <div>
-                    {
-                        u.followed
-                            ? <button
-                                className={s.btnStyle}
-                                onClick={() => onClickUnFollowFromUser(u.id)}
-                                disabled={followingInProgress.some(id => id === u.id)}
-                            >
-                                Unfollow
-                            </button>
-                            : <button
-                                className={s.btnStyle}
-                                onClick={() => onClickFollowOnUser(u.id)}
-                                disabled={followingInProgress.some(id => id === u.id)}
-                            >
-                                Follow
-                            </button>
-                    }
-                </div>
-            </div>
+                isFetching
+                    ? <Preloader/>
+                    : <div>
                         <div>
-                            <div>{u.name}</div>
-                            <div>{u.status}</div>
+                            {
+                                pages.map(p => (
+                                    <span
+                                        key={`${currentPage}-${p}`}
+                                        onClick={() => onPageChanged(p)}
+                                        className={currentPage === p ? s.selectedPage : s.page}
+                                    >{p}
+                        </span>
+                                ))
+                            }
                         </div>
+                        {
+                            users.map(user => <User
+                                    key={user.id}
+                                    user={user}
+                                />
+                            )}
                     </div>
-                )}
+            }
         </div>
     );
 };

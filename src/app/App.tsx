@@ -3,12 +3,12 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {Route, withRouter} from "react-router-dom";
 
-import UsersContainer from "../components/body/Users/UsersContainer";
 import Dialogs from "../components/body/Dialogs/DialogsContainer";
 import HeaderContainer from "../components/header/HeaderContainer";
 import Login from "../components/body/Login/Login";
 import Profile from "../components/body/Profile/Profile";
 import Navbar from "../components/navbar/Navbar";
+import Users from "../components/body/Users/Users";
 
 import {initializeApp} from "../store/appReducer/appReducer";
 import {getAppInitialized} from "../store/appReducer/appSelectors";
@@ -38,7 +38,7 @@ class App extends Component<AppType> {
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs' render={() => <Dialogs/>}/>
                     <Route path='/profile/:userId?' render={() => <Profile/>}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
+                    <Route path='/users' render={() => <Users/>}/>
                     <Route path='/login' render={() => <Login/>}/>
                 </div>
             </div>
